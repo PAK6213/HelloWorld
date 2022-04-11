@@ -33,7 +33,7 @@ public class Score {
 			max = score3;
 		}
 		
-		System.out.printf("합은 %3d점이고 평균은 %.2f점이고 최고점은 %2d점입니다.",sum,avg,max);
+		System.out.printf("합은 %3d점이고 평균은 %.2f점이고 최고점은 %3d점입니다.",sum,avg,max);
 
 	}
 
