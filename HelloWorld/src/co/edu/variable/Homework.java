@@ -1,5 +1,7 @@
 package co.edu.variable;
 
+import java.util.Scanner;
+
 public class Homework {
 
 	public static void main(String[] args) {
@@ -7,16 +9,13 @@ public class Homework {
 		   아래의 2문제의 기능을 구현하는 코드를 작성하고 commit & push 작업
 		   내일 학원에서 pull하여 확인
 		   오렌지 127개 10개씩 담을 수 있는 상자. 5개씩 담을 수 있는 상자.
-
-		   영수증 물건의 가격과 현금
-		   [현금] 10000원
-		   [물건가격] 7500원
-		   [부가세] 750원
-		   [잔돈] 2500원
 		 */
 
-
-		int orange = 127;
+		Scanner scn = new Scanner(System.in);
+		System.out.print("오렌지의 개수를 입력하세요 :");
+		
+		int orange;
+		orange = scn.nextInt();
 		int tenbox, fivebox;
 
 		tenbox = orange / 10;
@@ -24,8 +23,13 @@ public class Homework {
 
 		fivebox = orange / 5;
 		orange = orange % 5;
+		
+		if(orange != 0)
+		{
+			fivebox = fivebox + 1;
+		}
 
-		System.out.printf("10개씩 담은 상자는 %d개이고, 5개씩 담은 상자는 %d개이고 남은 오렌지의 개수는 %d개이다.", tenbox, fivebox, orange);
+		System.out.printf("10개씩 담은 상자는 %d개이고, 5개씩 담은 상자는 %d개이다.", tenbox, fivebox);
 
 	}
 
