@@ -22,8 +22,8 @@ public class NestedExample {
 		System.out.println();
 
          // p161  6번
-		for(int i = 5; i >= 1; i--) {
-			for(int j = 1; j <= 5; j++) {
+		for(int i = 20; i >= 1; i--) {
+			for(int j = 1; j <= 20; j++) {
 				if(j < i) {
 					System.out.print(" ");	
 				} else {
