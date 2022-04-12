@@ -1,5 +1,4 @@
 package co.edu.variable;
-
 import java.util.Scanner;
 
 public class Homework2 {
