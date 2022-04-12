@@ -12,7 +12,7 @@ public class WhileHomework {
 //		      이기는 경우 1=2  2=3  3=1 
 //		      이외의 경우는 짐.
 //		      가위 (1) -> You Win. You lose.
-		/*1번
+		
 		
 		Scanner scn = new Scanner(System.in);
 		int dice;
@@ -27,8 +27,9 @@ public class WhileHomework {
 				break;
 			}
 			System.out.println("틀렸습니다. 다시 입력하세요.");
-		}*/
+		}
 		
+		/* 2번
 		Scanner scn = new Scanner(System.in);
 		int you , me;
 		you = (int)(Math.random()*3) + 1;
@@ -38,10 +39,10 @@ public class WhileHomework {
 		while(isTrue) {
 			System.out.print("가위(1) 바위(2) 보(3) 중 하나를 고르십시오.");
 			me = scn.nextInt();
-			
 			if(me == 1) {
 				if(you == 3) {
-					System.out.println("You Win.");
+					System.out.println("You Win. game over");
+					break;
 				} else {
 					System.out.println("You Lose");
 				}
@@ -49,7 +50,8 @@ public class WhileHomework {
 			
 			if(me == 2) {
 				if(you == 1) {
-					System.out.println("You Win.");
+					System.out.println("You Win. game over");
+					break;
 				} else {
 					System.out.println("You Lose");
 				}
@@ -57,14 +59,15 @@ public class WhileHomework {
 			
 			if(me == 3) {
 				if(you == 2) {
-					System.out.println("You Win.");
+					System.out.println("You Win. game over");
+					break;
 				} else {
 					System.out.println("You Lose.");
 				}
 			}
 			
 		}
-		System.out.println("상대는 %d를 냈습니다." + you);
+		System.out.printf("상대는 %d를 냈습니다." , you);*/
 	}
 
 }
