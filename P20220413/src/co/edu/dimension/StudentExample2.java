@@ -20,8 +20,13 @@ public class StudentExample2 {
 		}
 		
 		System.out.print("조회하고 싶은 이름을 입력하세요 :");
+		name = scn.next();
 		
-		
+		for(int i = 0; i < students.length; i++) {
+			if(name.equals(students[i].studName)) {
+				System.out.printf("%s는 %d살이고 %d점입니다.",students[i].studName, students[i].age, students[i].score);
+			}
+		}
 		
 	
 		
