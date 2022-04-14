@@ -9,6 +9,8 @@ public class BoardExe {
 		// BoardList에 정의해놓은 필드와 메소드를 활용해서 기능.
 		BoardList bl = new BoardList();  
 		bl.init(5);
+	
+		
 
 		while(true) {
 			System.out.println("1.추가 2.수정 3.목록 4.삭제 9.종료");
@@ -87,7 +89,12 @@ public class BoardExe {
 				Board[] boards = bl.boardList();
 				System.out.println("작성자 이름을 입력하세요");
 				String Wrname = scn.nextLine();
-				
+				boards = bl.searchdetailBoard(Wrname);
+				for (Board board : boards) { // 참조형 변수  참조배열
+					if(board != null) { // board 객체의 주소가 있다면.
+						board.getInfo();
+					}
+				}
 			}
 			else {
 				System.out.println("정확한 메뉴를 입력하세요.");

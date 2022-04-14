@@ -2,9 +2,14 @@ package co.edu;
 
 public class BoardList {
 	private Board[] boards;
+	private Board[] storeboards;
 	// 배열크기 초기화
 	public void init(int size) {
 		boards = new Board[size];
+	}
+	
+	public void init2(int size) {
+		storeboards = new Board[size];
 	}
 	// 배열에 한건 입력.
 	public int addBoard(Board board) {
@@ -71,14 +76,14 @@ public class BoardList {
 		return boards;
 	}
 	
-	// 작성자 이름을 받아 조회
+
+	// 작성자 이름을 받아 조회 같은 작성자만 조회
 	public Board[] searchdetailBoard(String Wr) {
 		for(int i = 0; i < boards.length; i++) {
 			if(boards[i].getWriter().equals(Wr)) {
-				return boards;
+				storeboards[i] = boards[i];
 			}
 		}
-		return null;
+		return storeboards;
 	}
-	
 }
