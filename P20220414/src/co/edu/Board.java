@@ -73,4 +73,13 @@ public class Board {
 				     "====================================================\n";
 		System.out.printf(info, this.boardNo,this.writer, this.title,this.searchCnt,this.content);
 	}
+   
+	@Override // 부모 클래스의 메소드를 자식클래스가 재정의할때 사용.
+		      // 최상위에는 Object클래스가 있음 
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", searchCnt=" + searchCnt + "]";
+	}
+	
+	
 }
