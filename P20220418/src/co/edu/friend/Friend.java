@@ -8,6 +8,9 @@ public class Friend {
 	private String phoneNumber; // 연락처
 	
 	// 생성자
+	public Friend() {
+		
+	}
 	public Friend(String name, String phoneNumber) {
 		super();
 		this.name = name;
