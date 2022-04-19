@@ -12,7 +12,7 @@ public class game {
 		int answer = 0;
 		int[] open = new int[5];
 		for(int i = 0; i < open.length; i++) {
-			open[i] = 42;
+			open[i] = 0;
 		}
 		int[] Answer = new int[5];
 
@@ -28,7 +28,9 @@ public class game {
 		System.out.print("찾을 숫자를 입력하세요. :");
 		number = scn.nextInt();
 		for(int i = 0; i < Answer.length; i++) {
-			System.out.printf("[%c]",open[i]);
+			if(open[i] == 0) {
+				System.out.printf("[*]");
+			}
 		}
 		System.out.println();
 
@@ -39,33 +41,34 @@ public class game {
 			if(Answer[answer-1] == number) {
 				open[answer-1] = Answer[answer-1];
 				for(int j = 0; j < Answer.length; j++) {
-					if(j == answer -1) {
-						System.out.printf("[%c]",open[j]+48);
-						
-						} else {
-							System.out.printf("[%c]",open[j]+48);
-						}
+					if(open[j] == 0) {
+						System.out.printf("[*]",open[j]);
+
+					} else {
+						System.out.printf("[%d]",open[j]);
+					}
 				}
+				System.out.println();
 				System.out.printf("%d번째 카드입니다.\n",answer);
 				break;
 			} else {
 				open[answer-1] = Answer[answer-1];
-				
+
 				for(int k = 0; k < Answer.length; k++) {
-					if(k == answer -1) {
-					System.out.printf("[%c]",open[k]+48);
-					
+					if(open[k] == 0) {
+						System.out.printf("[*]");
+
 					} else {
-						System.out.printf("[%c]",open[k]+48);
+						System.out.printf("[%d]",open[k]);
 					}
 				}
 				System.out.println();
 			}
-			
 
-			
+
+
 		}
-		
+
 
 	}
 
