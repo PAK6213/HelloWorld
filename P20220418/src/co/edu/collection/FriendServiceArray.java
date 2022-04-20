@@ -1,14 +1,18 @@
-package co.edu.collection;
+/*package co.edu.collection;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import co.edu.friend.Friend;
+import co.edu.friend.Gender;
 // 배열활용
 public class FriendServiceArray implements FriendService {
 
 	Friend[] friends = new Friend[10];
 	Scanner scn = new Scanner(System.in);
+	
 	@Override
+	// friend 인스턴스를 매개변수로 넘겨받아 객체배열이 비어있는곳을 확인하여 add
 	public void addFriend(Friend friend) {
 		for(int i = 0; i < friends.length; i++) {
 			if(friends[i] == null) {
@@ -21,14 +25,11 @@ public class FriendServiceArray implements FriendService {
 	}
 
 	@Override
+	// 매개변수로 friend 인스턴스를 넘겨받아 name을 비교후 phonenumber 수정
 	public void modFriend(Friend friend) {
-		System.out.print("찾을 이름을 입력하세요 :");
-		String findName = scn.nextLine();
 		for(int i = 0; i < friends.length; i++) {
-			if(friends[i].getName().equals(findName)) {
-				System.out.print("수정할 연락처를 입력하세요 :");
-				String modPhone = scn.nextLine();
-				friends[i].setPhoneNumber(modPhone);
+			if(friends[i] != null && friends[i].getName().equals(friend.getName())) {
+				friends[i].setPhoneNumber(friend.getPhoneNumber());
 				break;
 			}
 		}
@@ -36,10 +37,8 @@ public class FriendServiceArray implements FriendService {
 
 	@Override
 	public void remFriend(String name) {
-		System.out.print("삭제할 이름을 입력하세요 :");
-		String delName = scn.nextLine();
 		for(int i = 0; i < friends.length; i++) {
-			if(friends[i].getName().equals(delName)) {
+			if(friends[i].getName().equals(name)) {
 				friends[i] = null;
 				break;
 			}
@@ -49,23 +48,23 @@ public class FriendServiceArray implements FriendService {
 	@Override
 	public Friend findFriend(String name) {
 		Friend friend = new Friend();
-		System.out.print("조회할 이름을 입력하세요 :");
-		String findName = scn.nextLine();
 		for(int i = 0; i < friends.length; i++) {
-			if(friends[i].getName().equals(findName)) {
+			if(friends[i] != null && friends[i].getName().equals(name)) {
 				friend = friends[i];
-				break;
+				return friend;
 			}
 		}
 		return friend;
 	}
-	
-	public void showFriend() {
-		for(Friend friend : friends) {
-			if(friend != null) {
-				System.out.println("친구정보: " + friend.toString());
-			}
-		}
-	}
 
-}
+	
+	
+//	public ArrayList<Friend> findGender(Gender gender) {
+//		ArrayList<Friend> list = new ArrayList<Friend>();
+//		for(int i = 0; i < friends.length; i++) {
+//			if()
+//		}
+//		return list;
+//	}
+
+}*/
