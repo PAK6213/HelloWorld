@@ -46,6 +46,8 @@ public class BoardApp implements BoardService {
 
 	@Override
 	public void detailBoard(int boardNo) {
+		
+		
 		// 조회할 boardNo을 매개변수로 받아 작업을 진행.
 		for(int i = 0; i < boards.size(); i++) {
 			// ArrayList의 i번째의 Name과 매개변수 인스턴스의 Name과 비교
