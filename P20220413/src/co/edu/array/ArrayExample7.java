@@ -19,6 +19,7 @@ public class ArrayExample7 {
 			System.out.printf("%4s", days[i]);
 		}
 
+		
 		System.out.println();
 		int space = getDayInfo(month);
 		for(int i = 0; i
