@@ -36,19 +36,25 @@ import java.util.Properties;
 // 싱글툰 class 패턴
 
 public class DataSource {
+	//싱글톤 class를 만드는 기본적인 방법.
+	// 자신을 객체로 하나 만듦.
 	private static DataSource dataSource = new DataSource();
-	private Connection conn;
 	// 자기자신을 외부에서 생성못하게함.
 	private DataSource() {};
+	
+	
+	private Connection conn;  // App과 DBMS간의 연결객체
 	private String driver;
 	private String url;
 	private String user;
 	private String password;
 	
+	// 나를 호출해서 사용할 getInstance생성 (스택영역) -> static , class
 	public static DataSource getInstance() {
 		return dataSource;
 	}
-	// 연걸
+	
+	// 연결
 	public Connection getConnection() {
 		configuration();  // properties driver url user password 값을 읽어옴.
 		try {
@@ -62,13 +68,13 @@ public class DataSource {
 		}
 		return conn;
 	}
-	
+	// Properties 객체를 이용하여 외부에 있는 파일을 읽어옴.
 	private void configuration() {
 		//Properties 경로를 읽어옴.  Properties 파일의 경로는 src/main/resources 밑에 있어야함.
 		Properties properties = new Properties();
 		String resource = getClass().getResource("/db.properties").getPath();
 		try {
-			
+			//properties 객체에 한쌍씩 불러온다.
 			properties.load(new FileReader(resource));
 			driver = properties.getProperty("driver");
 			url = properties.getProperty("url");
