@@ -1,24 +1,32 @@
 package Miniproject.Damagochi;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
+import Miniproject.Damagochi.Game.DamagochiImpl;
+import Miniproject.Damagochi.Game.DamagochiService;
+import Miniproject.Damagochi.Game.DamagochiSignUp;
+import Miniproject.Damagochi.Game.DamagochiSignUpImpl;
 import Miniproject.Damagochi.SignUp.Service;
 import Miniproject.Damagochi.SignUp.ServiceImpl;
+import Miniproject.Damagochi.dto.Damagochi;
 import Miniproject.Damagochi.dto.User;
 
 public class Menu {
-	// user의 정보를 담기위한 ArrayList
-	List<User> userlist = new ArrayList<User>();
+//	// user의 정보를 담기위한 ArrayList
+//	List<User> userlist = new ArrayList<User>();
+//	// damagochi의 정보를 담기위한 ArrayList
+//	List<Damagochi> damagochilist = new ArrayList<Damagochi>();
+	
 	Service service = new ServiceImpl();
-
+	DamagochiService damagochiservice = new DamagochiImpl();
+	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
+	private String loginId;
 	private Scanner sc = new Scanner(System.in);
 	private int menu;
 
 	// main Menu 실행
 	public void main() {
-		
+
 		boolean b = true;
 
 		while(b) {
@@ -45,8 +53,6 @@ public class Menu {
 				e.printStackTrace();
 			}
 		}
-
-
 	}
 
 	// first MenuTitle
@@ -92,10 +98,9 @@ public class Menu {
 		boolean b = true;
 		User user = new User();
 		int result = 0; // 로그인 결과 여부
-
 		while(b) {
 			System.out.print("로그인 아이디 입력 :");
-			String loginId = sc.nextLine();
+			loginId = sc.nextLine();
 			System.out.print("로그인 패스워드 입력 : ");
 			String password = sc.nextLine();
 			user.setUserId(loginId);
@@ -124,7 +129,7 @@ public class Menu {
 		System.out.println("=============4.다마고치 삭제=================");
 		System.out.println("=============5.이전메뉴    =================");
 		System.out.println("==========================================");
-		
+
 		boolean b = true;
 		while(b) {
 			System.out.print("안녕하세요. 이용하실 메뉴를 입력하세요 : ");
@@ -134,13 +139,13 @@ public class Menu {
 			try {
 				// 다마고치 생성
 				if(menu == 1) { 
-							
-					// 다마고치 불러오기
+					damagochiMenuSignUp();
+					// 플레이 할 다마고치 불러와 게임시작
 				} else if(menu == 2) { 
-					
+					damagochiloadToplay();
 					// 다마고치 저장
 				} else if(menu == 3) { 
-					
+
 					// 다마고치 삭제
 				} else if(menu == 4) {
 
@@ -153,10 +158,28 @@ public class Menu {
 			}
 		}
 
-		
-		
-		
-		
+
+	}
+	
+	// 이름은 입력받고 나머지 변수는 기본값으로 적용.
+	private void damagochiMenuSignUp () {
+		Damagochi damagochi = new Damagochi();
+		System.out.print("생성할 다마고치 이름을 입력하세요 : ");
+		String damagochiName = sc.nextLine();
+		damagochi.setUserId(loginId);
+		damagochi.setDamagochiName(damagochiName);
+		damagochisignup.insertDamagochi(damagochi);
+	}
+	
+	// 다마고치 불러오기
+	private void damagochiloadToplay() {
+		Damagochi damagochi = new Damagochi();
+		System.out.print("불러올 다마고치의 이름을 입력하세요 : ");
+		String damagochiName = sc.nextLine();
+		damagochi.setUserId(damagochiName);
+		damagochisignup.readDamagochi(damagochi);
 		
 	}
+	
+	
 }

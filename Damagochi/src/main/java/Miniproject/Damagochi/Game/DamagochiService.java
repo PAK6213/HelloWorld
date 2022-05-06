@@ -1,6 +1,8 @@
 package Miniproject.Damagochi.Game;
 
 public interface DamagochiService {
+	
+	
 	public void eat();  // 음식먹기
 	public void drinking();  // 마시기
 	public void sleeping(); // 잠자기

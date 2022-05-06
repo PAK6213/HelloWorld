@@ -41,13 +41,13 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public int updateUser(User user) {
-		// TODO Auto-generated method stub
+		// 회원정보수정
 		return 0;
 	}
 
 	@Override
 	public int deleteUser(User user) {
-		// TODO Auto-generated method stub
+		// 회원탈퇴
 		return 0;
 	}
 	
@@ -65,7 +65,7 @@ public class ServiceImpl implements Service {
 				user2.setPassword(result.getString("PASSWORD"));
 			}
 			if(user.getPassword().equals(user2.getPassword())) {
-				System.out.println("로그인 성공");
+				System.out.println("!!!!!!!!!!!!!로그인 성공!!!!!!!!!!!!!");
 				return 1;
 			}
 		} catch (SQLException e) {

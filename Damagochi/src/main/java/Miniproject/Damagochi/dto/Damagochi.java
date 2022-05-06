@@ -4,14 +4,20 @@ import lombok.Data;
 
 @Data
 public class Damagochi {
+	//멤버변수
+	private String userId;
 	private String damagochiName;
-	private int satiety;
-	private int thirst;
-	private int iqLevel;
-	private int socialLevel;
-	private int healthLevel;
-	private int iqExp;
-	private int socialExp;
-	private int healthExp;
+	private int satiety = 100;
+	private int thirst = 0;
+	private int iqLevel = 0;
+	private int socialLevel = 0;
+	private int healthLevel = 0;
+	private int iqExp = 0;
+	private int socialExp = 0;
+	private int healthExp = 0;
+	
+	
+	// 생성자 및 getter setter
+	
 	
 }
