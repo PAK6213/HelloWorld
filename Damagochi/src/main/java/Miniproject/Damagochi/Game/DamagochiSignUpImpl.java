@@ -22,20 +22,12 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 	@Override
 	public int insertDamagochi(Damagochi damagochi) {
 		// 다마고치를 입력받은 사용자 이름, 다마고치 이름이 외의 값은 기본값으로 생성
-		String sql = "INSERT INTO DAMAGOCHI VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO DAMAGOCHI VALUES (?,?,100,0,0,0,0,0,0,0)";
 		int n = 0;
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, damagochi.getUserId());
 			psmt.setString(2, damagochi.getDamagochiName());
-			psmt.setInt(3, damagochi.getSatiety());
-			psmt.setInt(4, damagochi.getThirst());
-			psmt.setInt(5, damagochi.getIqExp());
-			psmt.setInt(6, damagochi.getIqLevel());
-			psmt.setInt(7, damagochi.getSocialExp());
-			psmt.setInt(8, damagochi.getSocialLevel());
-			psmt.setInt(9, damagochi.getHealthExp());
-			psmt.setInt(10, damagochi.getHealthLevel());
 			n = psmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -46,8 +38,29 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 	@Override
 	public int updateDamagochi(Damagochi damagochi) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 다마고치 업데이트
+	
+		int n = 0;
+		String sql = "UPDATE DAMAGOCHI SET SATIETY = ? , THIRST = ?, IQ_EXP = ? , IQ_LEVEL = ?, SOCIAL_EXP = ?"
+				+ ", SOCIAL_LEVEL = ? ,HEALTH_EXP = ?  ,HEALTH_LEVEL = ? WHERE DAMAGOCHI_NAME = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, damagochi.getSatiety());
+			psmt.setInt(2, damagochi.getThirst());
+			psmt.setInt(3, damagochi.getIqExp());
+			psmt.setInt(4, damagochi.getIqLevel());
+			psmt.setInt(5, damagochi.getSocialExp());
+			psmt.setInt(6, damagochi.getSocialLevel());
+			psmt.setInt(7, damagochi.getHealthExp());
+			psmt.setInt(8, damagochi.getHealthLevel());
+			psmt.setString(9, damagochi.getDamagochiName());
+			n = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return n;
 	}
 
 	@Override
@@ -67,8 +80,9 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 			result = psmt.executeQuery();
 			
 			if(result.next()) {
+				vo.setUserId(result.getString("USER_ID"));
 				vo.setDamagochiName(result.getString("DAMAGOCHI_NAME"));
-				vo.setSatiety(result.getInt("SATITEY"));
+				vo.setSatiety(result.getInt("SATIETY"));
 				vo.setThirst(result.getInt("THIRST"));
 				vo.setIqExp(result.getInt("IQ_EXP"));
 				vo.setIqLevel(result.getInt("IQ_LEVEL"));
@@ -78,7 +92,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 				vo.setHealthLevel(result.getInt("HEALTH_LEVEL"));
 			}
 			//user_id랑 damagochi name을 못가져옴.
-			System.out.println(vo.toString() + " 불러오기 성공!!");
+			
 			
 			
 		} catch(SQLException e) {

@@ -120,37 +120,37 @@ public class Menu {
 
 
 	private void damagochiMenu() {
-		System.out.println("==========================================");
-		System.out.println("==========================================");
-		System.out.println("==========다마고치 게임을 시작합니다.===========");
-		System.out.println("============ 1.다마고치 생성 ================");
-		System.out.println("=============2.다마고치 불러오기==============");
-		System.out.println("=============3.다마고치 저장=================");
-		System.out.println("=============4.다마고치 삭제=================");
-		System.out.println("=============5.이전메뉴    =================");
-		System.out.println("==========================================");
+		
 
 		boolean b = true;
 		while(b) {
+			System.out.println("==========================================");
+			System.out.println("==========================================");
+			System.out.println("==========다마고치 게임을 시작합니다.===========");
+			System.out.println("============ 1.다마고치 생성 ================");
+			System.out.println("=============2.다마고치 불러오기==============");
+			System.out.println("=============3.다마고치 삭제=================");
+			System.out.println("=============4.이전메뉴    =================");
+			System.out.println("==========================================");
 			System.out.print("안녕하세요. 이용하실 메뉴를 입력하세요 : ");
 			menu = sc.nextInt();
 			sc.nextLine();
 
 			try {
-				// 다마고치 생성
 				if(menu == 1) { 
+					// 다마고치 생성
 					damagochiMenuSignUp();
-					// 플레이 할 다마고치 불러와 게임시작
+					
 				} else if(menu == 2) { 
+					// 플레이 할 다마고치 불러와 게임시작
 					damagochiloadToplay();
-					// 다마고치 저장
-				} else if(menu == 3) { 
-
+					
+				} else if(menu == 3) {
 					// 다마고치 삭제
-				} else if(menu == 4) {
 
+					
+				} else if(menu == 4) {
 					//이전메뉴로 돌아가기.
-				} else if(menu == 5) {
 					break;
 				}
 			} catch (Exception e) {
@@ -173,11 +173,72 @@ public class Menu {
 	
 	// 다마고치 불러오기
 	private void damagochiloadToplay() {
+		// 다마고치 불러오기
 		Damagochi damagochi = new Damagochi();
 		System.out.print("불러올 다마고치의 이름을 입력하세요 : ");
 		String damagochiName = sc.nextLine();
-		damagochi.setUserId(damagochiName);
-		damagochisignup.readDamagochi(damagochi);
+		damagochi.setDamagochiName(damagochiName);
+		damagochi = damagochisignup.readDamagochi(damagochi);
+		
+		// 불러온 다마고치로 게임시작!
+		System.out.println("선택하신 다마고치의 정보는 다음과 같습니다.\n" + damagochi.toString());
+		
+		
+		boolean b = true;
+		while(b) {
+			
+			/* 다마고치의 조건확인 
+			1. 활동을 한번 할 때 satiety 감소 , thirst 증가는 무조건 이루어진다.
+			2. 잠자기 및 휴식을 제외한 활동은 hp가 감소한다.
+			3. 다른 활동을 5번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 7번 초과시 실패 한다. !!
+			4. hp (0미만시 경고 -50 실패)
+			5. satiety (0미만 시 경고 -50 실패)
+			6. thirst (100초과 시 경고 150 실패)*/
+			
+			
+			System.out.println("===========================================");
+			System.out.println("===============게임을 시작합니다===============");
+			System.out.println("===============1. 음식먹기    ===============");
+			System.out.println("===============2. 마시기     ===============");
+			System.out.println("===============3. 잠자기     ===============");
+			System.out.println("===============4. 휴식하기    ===============");
+			System.out.println("===============5. 운동하기    ===============");
+			System.out.println("===============6. 친구만나기  ===============");
+			System.out.println("===============7. 공부하기    ===============");
+			System.out.println("===============8. 저장 후 종료================");
+			System.out.println("===========================================");
+			System.out.print("활동을 선택하세요 : ");
+			menu = sc.nextInt();
+			sc.nextLine();
+
+			try {
+				// 음식먹기
+				if(menu == 1) { 
+					damagochi = damagochiservice.eat(damagochi);
+				} else if(menu == 2) { 
+				
+				} else if(menu == 3) { 
+
+				} else if(menu == 4) {
+
+				} else if(menu == 5) {
+					
+				} else if(menu == 6) {
+					
+				} else if(menu == 7) {
+					
+				} else if(menu == 8) {
+					damagochisignup.updateDamagochi(damagochi);
+					break;
+				} else {
+					System.out.println("잘못 입력 하였습니다.");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
 		
 	}
 	

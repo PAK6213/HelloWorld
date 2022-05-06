@@ -108,7 +108,7 @@ public class StudentServiceImpl implements StudentService {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return n;
 	}
 
 	@Override
