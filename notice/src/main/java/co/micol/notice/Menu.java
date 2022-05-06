@@ -55,7 +55,7 @@ public class Menu {
 			System.out.println("============4.게시글수정============");
 			System.out.println("============5.게시글삭제============");
 			System.out.println("============6.메인메뉴==============");
-
+			
 			System.out.print("메뉴를 입력하세요 : ");
 			bmenu = sc.nextInt();
 			sc.nextLine();
