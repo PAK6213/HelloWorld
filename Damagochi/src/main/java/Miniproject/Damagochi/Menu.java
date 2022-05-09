@@ -1,5 +1,8 @@
 package Miniproject.Damagochi;
 
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 import Miniproject.Damagochi.Game.DamagochiImpl;
@@ -16,7 +19,7 @@ public class Menu {
 //	List<User> userlist = new ArrayList<User>();
 //	// damagochi의 정보를 담기위한 ArrayList
 //	List<Damagochi> damagochilist = new ArrayList<Damagochi>();
-	
+	List<Damagochi> damagochis = new ArrayList<Damagochi>();
 	Service service = new ServiceImpl();
 	DamagochiService damagochiservice = new DamagochiImpl();
 	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
@@ -32,11 +35,10 @@ public class Menu {
 		while(b) {
 			menuTitle();
 			System.out.print("안녕하세요. 이용하실 메뉴를 입력하세요 : ");
-			menu = sc.nextInt();
-			sc.nextLine();
-
-
+			
 			try {
+				menu = sc.nextInt();
+				sc.nextLine();
 				if(menu == 1) { // 회원 가입.
 					signUp();		
 				} else if(menu == 2) { // 로그인
@@ -49,7 +51,7 @@ public class Menu {
 				} else {
 					System.out.println("잘못입력");
 				}
-			} catch (Exception e) {
+			} catch (InputMismatchException e) {
 				e.printStackTrace();
 			}
 		}
@@ -107,18 +109,29 @@ public class Menu {
 			user.setPassword(password);
 
 			result = service.loginuser(user);
-			//0 : 접속불가  1 : 접속완료
+			//0 : 비밀번호 오류  1 : 접속완료  2 : ID 생성이 되지 않음.
 			if(result == 1) {
+				damagochiMenu();
 				break;
-			} else {
-				System.out.println("입력 정보가 다릅니다. 다시 입력하세요");
+			} else if(result == 2) {
+				System.out.println("생성된 아이디가 없습니다. 회원가입을 해주세요!!");
+				break;
+			}else{
+				System.out.println("비밀번호가 틀렸습니다. 다시 입력하세요");
 			}
 		}
-		damagochiMenu();
 	}
+	
 	// 사용자의 score 기준으로 정렬하여 출력
 	private void rank() {
-		
+		int rank = 1;
+		damagochis = damagochisignup.selectListDamagochi();
+		System.out.println("===============순위================");
+		System.out.println("     user_id          score       ");
+		for(Damagochi da : damagochis) {
+			System.out.printf("%d등   %-10s  %5d\n",rank,da.getUserId(),da.getScore());
+			rank++;
+		}
 	}
 
 
@@ -166,7 +179,7 @@ public class Menu {
 	}
 	
 	// 이름은 입력받고 나머지 변수는 기본값으로 적용.
-	// 중복된 다마고치의 이름이 있는지 확인해야함. (X)
+	// 중복된 다마고치의 이름이 있는지 확인해야함. (O)
 	private void damagochiMenuSignUp () {
 		Damagochi damagochi = new Damagochi();
 		System.out.print("생성할 다마고치 이름을 입력하세요 : ");
@@ -216,9 +229,6 @@ public class Menu {
 			
 			// 불러온 다마고치로 게임시작!
 			System.out.println("선택하신 다마고치의 정보는 다음과 같습니다.\n" + damagochi.toString());
-			
-			
-			System.out.println("===========================================");
 			System.out.println("===============게임을 시작합니다===============");
 			System.out.println("===============1. 음식먹기    ===============");
 			System.out.println("===============2. 마시기     ===============");
@@ -228,7 +238,6 @@ public class Menu {
 			System.out.println("===============6. 친구만나기  ===============");
 			System.out.println("===============7. 공부하기    ===============");
 			System.out.println("===============8. 종료      ================");
-			System.out.println("===========================================");
 			System.out.print("활동을 선택하세요 : ");
 			menu = sc.nextInt();
 			sc.nextLine();

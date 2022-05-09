@@ -18,10 +18,14 @@ public class Damagochi {
 	private int healthExp ;
 	private int hp;
 	private int depressionCount; 
+	private int score;
 	
 	public Damagochi () {
 		
 	}
+	
+	
+	
 	
 	// 생성자 및 getter setter
 	

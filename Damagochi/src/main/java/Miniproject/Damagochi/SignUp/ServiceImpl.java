@@ -56,13 +56,18 @@ public class ServiceImpl implements Service {
 	// user : 입력한 아이디 및 패스워드 정보를 가짐  user2 : 매칭된 ID의 DB에 존재하는 password
 	public int loginuser(User user) { 
 		User user2 = new User();
-		String sql = "SELECT PASSWORD FROM USERS WHERE USER_ID = ?";
+		String sql = "SELECT USER_ID, PASSWORD FROM USERS WHERE USER_ID = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, user.getUserId());
 			result = psmt.executeQuery();
+			
 			if(result.next()) {
 				user2.setPassword(result.getString("PASSWORD"));
+				user2.setUserId(result.getString("USER_ID"));
+			} 
+			if(user2.getUserId() == null) {
+				return 2;
 			}
 			if(user.getPassword().equals(user2.getPassword())) {
 				System.out.println("!!!!!!!!!!!!!로그인 성공!!!!!!!!!!!!!");
