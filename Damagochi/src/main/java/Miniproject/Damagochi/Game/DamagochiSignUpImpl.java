@@ -22,7 +22,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 	@Override
 	public int insertDamagochi(Damagochi damagochi) {
 		// 다마고치를 입력받은 사용자 이름, 다마고치 이름이 외의 값은 기본값으로 생성
-		String sql = "INSERT INTO DAMAGOCHI VALUES (?,?,100,0,0,0,0,0,0,0)";
+		String sql = "INSERT INTO DAMAGOCHI VALUES (?,?,100,0,0,1,0,1,0,1,100,0)";
 		int n = 0;
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -41,8 +41,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 		// 다마고치 업데이트
 	
 		int n = 0;
-		String sql = "UPDATE DAMAGOCHI SET SATIETY = ? , THIRST = ?, IQ_EXP = ? , IQ_LEVEL = ?, SOCIAL_EXP = ?"
-				+ ", SOCIAL_LEVEL = ? ,HEALTH_EXP = ?  ,HEALTH_LEVEL = ? WHERE DAMAGOCHI_NAME = ?";
+		String sql = "UPDATE DAMAGOCHI SET SATIETY = ? , THIRST = ?, IQ_EXP = ? , IQ_LEVEL = ?, SOCIAL_EXP = ?, SOCIAL_LEVEL = ? ,HEALTH_EXP = ?  ,HEALTH_LEVEL = ? , HP = ?, DEPRESSION_COUNT = ? WHERE DAMAGOCHI_NAME = ?";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -54,7 +53,10 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 			psmt.setInt(6, damagochi.getSocialLevel());
 			psmt.setInt(7, damagochi.getHealthExp());
 			psmt.setInt(8, damagochi.getHealthLevel());
-			psmt.setString(9, damagochi.getDamagochiName());
+			psmt.setInt(9, damagochi.getHp());
+			psmt.setInt(10, damagochi.getDepressionCount());
+			psmt.setString(11, damagochi.getDamagochiName());
+			
 			n = psmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -65,8 +67,19 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 	@Override
 	public int deleteDamagochi(Damagochi damagochi) {
-		// TODO Auto-generated method stub
-		return 0;
+		// 다마고치 이름으로 검색하여 해당 다마고치의 정보를 삭제 
+		Damagochi vo = new Damagochi();
+		int n = 0;
+		String sql = "DELETE FROM DAMAGOCHI WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, damagochi.getDamagochiName());
+			n = psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return n;
 	}
 
 	@Override
@@ -90,8 +103,9 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 				vo.setSocialLevel(result.getInt("SOCIAL_LEVEL"));
 				vo.setHealthExp(result.getInt("HEALTH_LEVEL"));
 				vo.setHealthLevel(result.getInt("HEALTH_LEVEL"));
+				vo.setHp(result.getInt("HP"));
+				vo.setDepressionCount(result.getInt("DEPRESSION_COUNT"));
 			}
-			//user_id랑 damagochi name을 못가져옴.
 			
 			
 			
@@ -99,6 +113,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 			
 			e.printStackTrace();
 		}
+		// 불러올 다마고치를 찾을 수 없으면 		
 		
 		return vo;
 	}

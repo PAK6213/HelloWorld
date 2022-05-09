@@ -42,7 +42,7 @@ public class Menu {
 				} else if(menu == 2) { // 로그인
 					login();
 				} else if(menu == 3) { // 순위
-
+					rank();
 				} else if(menu == 4) {
 					System.out.println("종료");
 					break;
@@ -116,6 +116,10 @@ public class Menu {
 		}
 		damagochiMenu();
 	}
+	// 사용자의 score 기준으로 정렬하여 출력
+	private void rank() {
+		
+	}
 
 
 
@@ -147,7 +151,7 @@ public class Menu {
 					
 				} else if(menu == 3) {
 					// 다마고치 삭제
-
+					damagochidelete();
 					
 				} else if(menu == 4) {
 					//이전메뉴로 돌아가기.
@@ -162,6 +166,7 @@ public class Menu {
 	}
 	
 	// 이름은 입력받고 나머지 변수는 기본값으로 적용.
+	// 중복된 다마고치의 이름이 있는지 확인해야함. (X)
 	private void damagochiMenuSignUp () {
 		Damagochi damagochi = new Damagochi();
 		System.out.print("생성할 다마고치 이름을 입력하세요 : ");
@@ -173,27 +178,44 @@ public class Menu {
 	
 	// 다마고치 불러오기
 	private void damagochiloadToplay() {
-		// 다마고치 불러오기
+		// 다마고치 불러오기 
+
+		int check = 0;
 		Damagochi damagochi = new Damagochi();
 		System.out.print("불러올 다마고치의 이름을 입력하세요 : ");
 		String damagochiName = sc.nextLine();
 		damagochi.setDamagochiName(damagochiName);
 		damagochi = damagochisignup.readDamagochi(damagochi);
 		
-		// 불러온 다마고치로 게임시작!
-		System.out.println("선택하신 다마고치의 정보는 다음과 같습니다.\n" + damagochi.toString());
-		
 		
 		boolean b = true;
 		while(b) {
-			
 			/* 다마고치의 조건확인 
 			1. 활동을 한번 할 때 satiety 감소 , thirst 증가는 무조건 이루어진다.
 			2. 잠자기 및 휴식을 제외한 활동은 hp가 감소한다.
-			3. 다른 활동을 5번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 7번 초과시 실패 한다. !!
+			3. 다른 활동을 3번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 5번 초과시 실패 한다. !!
 			4. hp (0미만시 경고 -50 실패)
 			5. satiety (0미만 시 경고 -50 실패)
 			6. thirst (100초과 시 경고 150 실패)*/
+						
+			
+			// 메뉴가 한번 수행되고 나서 다마고치의 성공 실패 조건을 수행한 뒤 업데이트
+			// 다마고치가 조건으로 실패했을경우 해당 다마고치를 삭제하고 이전메뉴로이동.
+			damagochisignup.updateDamagochi(damagochi);
+			check = damagochiservice.checking(damagochi);
+			if(check == 1) {
+				damagochisignup.deleteDamagochi(damagochi);
+				break;
+			}
+			// 다마고치가 생성되지 않은경우에는 진행되지 않음.
+			if(check == 2) {
+				System.out.println("입력하신 다마고치가 존재하지 않습니다.");
+				System.out.println("다마고치를 생성 후 진행하세요!!!!!!!");
+				break;
+			}
+			
+			// 불러온 다마고치로 게임시작!
+			System.out.println("선택하신 다마고치의 정보는 다음과 같습니다.\n" + damagochi.toString());
 			
 			
 			System.out.println("===========================================");
@@ -205,7 +227,7 @@ public class Menu {
 			System.out.println("===============5. 운동하기    ===============");
 			System.out.println("===============6. 친구만나기  ===============");
 			System.out.println("===============7. 공부하기    ===============");
-			System.out.println("===============8. 저장 후 종료================");
+			System.out.println("===============8. 종료      ================");
 			System.out.println("===========================================");
 			System.out.print("활동을 선택하세요 : ");
 			menu = sc.nextInt();
@@ -215,20 +237,25 @@ public class Menu {
 				// 음식먹기
 				if(menu == 1) { 
 					damagochi = damagochiservice.eat(damagochi);
-				} else if(menu == 2) { 
-				
+				//마시기
+				} else if(menu == 2) { 				
+					damagochi = damagochiservice.drinking(damagochi);
+				//잠자기
 				} else if(menu == 3) { 
-
+					damagochi = damagochiservice.sleeping(damagochi);
+				//휴식하기
 				} else if(menu == 4) {
-
+					damagochi = damagochiservice.resting(damagochi);
+				// 운동하기
 				} else if(menu == 5) {
-					
+					damagochi = damagochiservice.excercising(damagochi);
+				// 친구만나기
 				} else if(menu == 6) {
-					
+					damagochi = damagochiservice.friendmeeting(damagochi);
 				} else if(menu == 7) {
-					
+					damagochi = damagochiservice.studying(damagochi);
 				} else if(menu == 8) {
-					damagochisignup.updateDamagochi(damagochi);
+					System.out.println("다마고치 게임을 종료합니다.");
 					break;
 				} else {
 					System.out.println("잘못 입력 하였습니다.");
@@ -238,9 +265,13 @@ public class Menu {
 			}
 		}
 		
-		
-		
 	}
-	
+	private void damagochidelete () {
+		Damagochi damagochi = new Damagochi();
+		System.out.print("삭제할 다마고치의 이름을 입력하세요 : ");
+		String damagochiName = sc.nextLine();
+		damagochi.setDamagochiName(damagochiName);
+		damagochisignup.deleteDamagochi(damagochi);
+	}
 	
 }
