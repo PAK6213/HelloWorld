@@ -1,7 +1,9 @@
 package Miniproject.Damagochi.Game;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
+import Minigame.Minigame;
 import Miniproject.Damagochi.dto.Damagochi;
 
 public class DamagochiImpl implements DamagochiService {
@@ -13,6 +15,7 @@ public class DamagochiImpl implements DamagochiService {
 
 	Scanner sc = new Scanner(System.in);
 	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
+	Minigame minigame = new Minigame();
 
 	@Override
 	public Damagochi eat(Damagochi damagochi) {
@@ -157,7 +160,7 @@ public class DamagochiImpl implements DamagochiService {
 		// 운동하기
 		// healthexp 증가 , hp 감소 , satitey 감소 , thirst 증가, socialexp 증가
 		System.out.println("운동을 선택하세요.");
-		
+
 		System.out.println("1. 산책 ");
 		System.out.println("2. 야구 ");
 		System.out.println("3. 축구 ");
@@ -192,7 +195,7 @@ public class DamagochiImpl implements DamagochiService {
 					System.out.println("         *   *     ");
 					Thread.sleep(1000);
 					clearScreen();
-					
+
 					System.out.println("                     ***      ");
 					System.out.println("                    *****     ");
 					System.out.println("                     ***      ");
@@ -235,7 +238,7 @@ public class DamagochiImpl implements DamagochiService {
 					System.out.println("  *   *                 *   *     ");
 					Thread.sleep(1000);
 					clearScreen();
-					
+
 					System.out.println("   ***                   ***      ");
 					System.out.println("  ***** *          ●● * *****     ");
 					System.out.println("   *** *               * ***      ");
@@ -278,7 +281,7 @@ public class DamagochiImpl implements DamagochiService {
 					System.out.println("  *   *       ●●        *   *     ");
 					Thread.sleep(1000);
 					clearScreen();
-					
+
 					System.out.println("   ***                   ***      ");
 					System.out.println("  *****                 *****     ");
 					System.out.println("   ***                   ***      ");
@@ -365,31 +368,14 @@ public class DamagochiImpl implements DamagochiService {
 		sc.nextLine();
 		//숫자 맞추기(UP & DOWN)
 		if(menu == 1) {
-			int randomNumber = (int)(Math.random()*10000) + 1;
-			int answerNumber;
-			boolean b = true;
-			System.out.println("숫자 맞추기 게임을시작합니다!!!!!!!!!");
-			System.out.println("숫자의 범위는 1~10000사이의 숫자입니다.");
-			while(b) {
-				System.out.print("정답 숫자를 입력하세요 : ");
-				answerNumber = sc.nextInt();
-				sc.nextLine();
-				if(randomNumber == answerNumber) {
-					System.out.println("정답입니다. iq_exe가 15증가하였습니다.");
-					damagochi.setIqExp(damagochi.getIqExp() + 15);
-					break;
-				} else if(randomNumber > answerNumber) {
-					System.out.println("입력한 수는 정답보다 작습니다.");
-				} else if(randomNumber < answerNumber) {
-					System.out.println("입력한 수는 정답보다 큽니다.");
-				}
-			}
+			minigame.UpDown();
+			damagochi.setIqExp(damagochi.getIqExp() + 15);
+			//단어 순서 맞추기
 		} else if(menu == 2) {
-
+			minigame.word();
+			damagochi.setIqExp(damagochi.getIqExp() + 30);
 		}
-
-
-
+		
 		damagochi.setSatiety(damagochi.getSatiety() - 20);
 		damagochi.setThirst(damagochi.getThirst() + 15);
 		damagochi.setHp(damagochi.getHp() - 20);

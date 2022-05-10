@@ -52,7 +52,7 @@ public class Menu {
 					System.out.println("잘못입력");
 				}
 			} catch (InputMismatchException e) {
-				e.printStackTrace();
+				System.out.println("숫자를 입력해주세요!!!");
 			}
 		}
 	}
@@ -70,6 +70,7 @@ public class Menu {
 	}
 	// 회원가입 
 	private void signUp() {
+		
 		User user = new User();
 		System.out.println("회원가입을 진행합니다.");
 		System.out.print("userId를 입력하세요 : ");
@@ -90,7 +91,7 @@ public class Menu {
 		user.setTel(tel);
 		// 각 정보를 입력받아서 insert
 		service.insertUser(user);
-
+		
 	}
 
 	// ID와 password를 입력받아 DB의 사용자 계정과 일치여부를 확인하여 접속하는 기능.
@@ -225,7 +226,7 @@ public class Menu {
 			}
 			
 			Thread thread = new Print();
-	    	thread.start();
+	    	//thread.start();
 			
 			// 불러온 다마고치로 게임시작!
 			System.out.println("선택하신 다마고치의 정보는 다음과 같습니다.\n" + damagochi.toString());
@@ -267,7 +268,7 @@ public class Menu {
 				// 종료
 				} else if(menu == 8) {
 					System.out.println("다마고치 게임을 종료합니다.");
-					thread.stop();
+					//thread.stop();
 					break;
 				} else {
 					System.out.println("잘못 입력 하였습니다.");

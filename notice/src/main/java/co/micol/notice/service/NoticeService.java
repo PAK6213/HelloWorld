@@ -10,6 +10,4 @@ public interface NoticeService {
 	int noticeInsert(NoticeVO vo); // 추가
 	int noticeUpdate(NoticeVO vo); // 변경
 	int noticeDelete(NoticeVO vo); // 삭제
-	
-
 }
