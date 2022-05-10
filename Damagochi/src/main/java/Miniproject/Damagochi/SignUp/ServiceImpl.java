@@ -38,18 +38,6 @@ public class ServiceImpl implements Service {
 		}
 		return n;
 	}
-
-	@Override
-	public int updateUser(User user) {
-		// 회원정보수정
-		return 0;
-	}
-
-	@Override
-	public int deleteUser(User user) {
-		// 회원탈퇴
-		return 0;
-	}
 	
 	@Override
 	// User 인스턴스를 받아 DB에 저장된 ID, password와 매칭하여 로그인 여부를 반환

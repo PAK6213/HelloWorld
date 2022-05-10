@@ -1,18 +1,14 @@
 package Miniproject.Damagochi.Game;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 import Minigame.Minigame;
+import Miniproject.Damagochi.StatePrint;
 import Miniproject.Damagochi.dto.Damagochi;
 
 public class DamagochiImpl implements DamagochiService {
-	//콘솔창 클리어
-	public static void clearScreen() {  
-		for (int i = 0; i < 80; i++)
-			System.out.println("");
-	}
-
+	
+	StatePrint sp = new StatePrint();
 	Scanner sc = new Scanner(System.in);
 	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
 	Minigame minigame = new Minigame();
@@ -98,40 +94,6 @@ public class DamagochiImpl implements DamagochiService {
 	public Damagochi sleeping(Damagochi damagochi) {
 		// 잠자기  
 		// hp 증가 , satitey 감소, thirst 증가
-
-		try {
-
-			for(int i = 0; i < 3; i++) {
-				clearScreen();
-				System.out.println("         **********    ***********");
-				System.out.println("                 *             *  ");
-				System.out.println("                *             *   ");
-				System.out.println("               *             *    ");
-				System.out.println("******        *             *     ");
-				System.out.println("    *        *             *      ");
-				System.out.println("   *        *             *       ");
-				System.out.println("  *        *             *        ");
-				System.out.println(" *        *             *         ");
-				System.out.println("******   ***********   ***********    *  *  *  *  *");
-				Thread.sleep(1000);
-				clearScreen();
-				System.out.println("           **********    ***********");
-				System.out.println("                   *             *  ");
-				System.out.println("                  *             *   ");
-				System.out.println("                 *             *    ");
-				System.out.println("  ******        *             *     ");
-				System.out.println("      *        *             *      ");
-				System.out.println("     *        *             *       ");
-				System.out.println("    *        *             *        ");
-				System.out.println("   *        *             *         ");
-				System.out.println("  ******   ***********   ***********    *  *  *  *  *");
-				Thread.sleep(1000);
-
-			}
-
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		damagochi.setHp(damagochi.getHp() + 100);
 		damagochi.setSatiety(damagochi.getSatiety() - 20);
 		damagochi.setThirst(damagochi.getThirst() + 15);
@@ -171,132 +133,15 @@ public class DamagochiImpl implements DamagochiService {
 		sc.nextLine();
 
 		if(menu == 1) {
-			try {
-				for(int i = 0; i < 3; i++) {
-					clearScreen();
-					System.out.println("   ***         ");
-					System.out.println("  *****        ");
-					System.out.println("   ***         ");
-					System.out.println("    *          ");
-					System.out.println("   ***         ");
-					System.out.println("  * * *        ");
-					System.out.println("   * *         ");
-					System.out.println("  *   *        ");
-					Thread.sleep(1000);
-					clearScreen();
-
-					System.out.println("          ***      ");
-					System.out.println("         *****     ");
-					System.out.println("          ***      ");
-					System.out.println("           *       ");
-					System.out.println("          ***      ");
-					System.out.println("         * * *     ");
-					System.out.println("          * *      ");
-					System.out.println("         *   *     ");
-					Thread.sleep(1000);
-					clearScreen();
-
-					System.out.println("                     ***      ");
-					System.out.println("                    *****     ");
-					System.out.println("                     ***      ");
-					System.out.println("                      *       ");
-					System.out.println("                     ***      ");
-					System.out.println("                    * * *     ");
-					System.out.println("                     * *      ");
-					System.out.println("                    *   *     ");
-					Thread.sleep(1000);
-				}
-
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sp.walking();
 			System.out.println("산책을 진행합니다.  healthExp가 30 증가 하였습니다.");
 			damagochi.setHealthExp(damagochi.getHealthExp() + 30);
 		} else if(menu == 2) {
-			try {
-				for(int i = 0; i < 3; i++) {
-					clearScreen();
-					System.out.println("   ***                   ***      ");
-					System.out.println("  ***** * ●●          * *****     ");
-					System.out.println("   *** *               * ***      ");
-					System.out.println("    * *                 * *       ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("  * *                     * *     ");
-					System.out.println("   * *                   * *      ");
-					System.out.println("  *   *                 *   *     ");
-					Thread.sleep(1000);
-					clearScreen();
-
-					System.out.println("   ***                   ***      ");
-					System.out.println("  ***** *     ●●      * *****     ");
-					System.out.println("   *** *               * ***      ");
-					System.out.println("    * *                 * *       ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("  * *                     * *     ");
-					System.out.println("   * *                   * *      ");
-					System.out.println("  *   *                 *   *     ");
-					Thread.sleep(1000);
-					clearScreen();
-
-					System.out.println("   ***                   ***      ");
-					System.out.println("  ***** *          ●● * *****     ");
-					System.out.println("   *** *               * ***      ");
-					System.out.println("    * *                 * *       ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("  * *                     * *     ");
-					System.out.println("   * *                   * *      ");
-					System.out.println("  *   *                 *   *     ");
-					Thread.sleep(1000);
-				}
-
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sp.baseball();
 			System.out.println("야구을 진행합니다. healthExp가 60 증가 하였습니다.");
 			damagochi.setHealthExp(damagochi.getHealthExp() + 60);
 		} else if(menu == 3) {
-			try {
-				for(int i = 0; i < 3; i++) {
-					clearScreen();
-					System.out.println("   ***                   ***      ");
-					System.out.println("  *****                 *****     ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("    *                     *       ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("  * * *                 * * *     ");
-					System.out.println("   * *                   * *      ");
-					System.out.println("  *   * ●●              *   *     ");
-					Thread.sleep(1000);
-					clearScreen();
-
-					System.out.println("   ***                   ***      ");
-					System.out.println("  *****                 *****     ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("    *                     *       ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("  * * *                 * * *     ");
-					System.out.println("   * *                   * *      ");
-					System.out.println("  *   *       ●●        *   *     ");
-					Thread.sleep(1000);
-					clearScreen();
-
-					System.out.println("   ***                   ***      ");
-					System.out.println("  *****                 *****     ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("    *                     *       ");
-					System.out.println("   ***                   ***      ");
-					System.out.println("  * * *                 * * *     ");
-					System.out.println("   * *                   * *      ");
-					System.out.println("  *   *              ●● *   *     ");
-					Thread.sleep(1000);
-				}
-
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sp.sc();
 			System.out.println("축구를 진행합니다. healthExp가 45 증가 하였습니다.");
 			damagochi.setHealthExp(damagochi.getHealthExp() + 45);
 		} else if(menu == 4) {
@@ -326,7 +171,6 @@ public class DamagochiImpl implements DamagochiService {
 		System.out.println("2. PC방 ");
 		System.out.println("3. 음식먹기 ");
 		System.out.println("4. 쇼핑 ");
-		//음악 넣어보기!!
 		System.out.println("5. 뮤지컬보기 ");
 
 		int menu = sc.nextInt();
@@ -360,10 +204,11 @@ public class DamagochiImpl implements DamagochiService {
 	@Override
 	public Damagochi studying(Damagochi damagochi) {
 		// 공부하기
-		System.out.println("메뉴를 선택하세요!!");
+		
 		System.out.println("1. 숫자 맞추기(UP & DOWN)");
 		System.out.println("2. 단어 순서맞추기  ");
-
+		System.out.println("3. 수도 맞추기 ");
+		System.out.print("메뉴를 선택하세요 : ");
 		int menu = sc.nextInt();
 		sc.nextLine();
 		//숫자 맞추기(UP & DOWN)
@@ -373,6 +218,10 @@ public class DamagochiImpl implements DamagochiService {
 			//단어 순서 맞추기
 		} else if(menu == 2) {
 			minigame.word();
+			damagochi.setIqExp(damagochi.getIqExp() + 30);
+		} else if(menu == 3) {
+			//수도 맞추기
+			minigame.Capital();
 			damagochi.setIqExp(damagochi.getIqExp() + 30);
 		}
 		
@@ -399,7 +248,7 @@ public class DamagochiImpl implements DamagochiService {
 			System.out.println(damagochi.getDamagochiName() + "가 우울증 위기 입니다. 친구 또는 운동을하여 사람을 만나세요!!");
 			if(damagochi.getDepressionCount() > 6) {
 				System.out.println(damagochi.getDamagochiName() + "가 우울증으로 인해 죽었습니다........");
-				System.out.println("다마고치를 다시 생성하세요.");
+				sp.death();
 				return check;
 			}
 		}
@@ -408,7 +257,7 @@ public class DamagochiImpl implements DamagochiService {
 			System.out.println(damagochi.getDamagochiName() +"가 피곤해합니다.");
 			if(damagochi.getHp() < -50) {
 				System.out.println(damagochi.getDamagochiName() + "가 체력부족으로인해 죽었습니다.");
-				System.out.println("다마고치를 다시 생성하세요.");
+				sp.death();
 				return check;
 			}
 		}
@@ -416,7 +265,7 @@ public class DamagochiImpl implements DamagochiService {
 			System.out.println(damagochi.getDamagochiName() + "가 배가고픕니다.");
 			if(damagochi.getSatiety() < -50) {
 				System.out.println(damagochi.getDamagochiName() + "가 배고픔으로인해 죽었습니다.");
-				System.out.println("다마고치를 다시 생성하세요.");
+				sp.death();
 				return check;
 			}
 		}
@@ -424,7 +273,7 @@ public class DamagochiImpl implements DamagochiService {
 			System.out.println(damagochi.getDamagochiName() + "가 목이마릅니다.");
 			if(damagochi.getThirst() > 150) {
 				System.out.println(damagochi.getDamagochiName() + "가 수분부족으로인해 죽었습니다.");
-				System.out.println("다마고치를 다시 생성하세요.");
+				sp.death();
 				return check;
 			}
 		}

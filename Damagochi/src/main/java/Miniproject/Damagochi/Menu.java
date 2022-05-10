@@ -60,11 +60,11 @@ public class Menu {
 	// first MenuTitle
 	private void menuTitle() {
 		System.out.println("==========================================");
-		System.out.println("=========안녕하세요!! 메뉴를 선택하세요.========");
-		System.out.println("================1.회원가입 =================");
-		System.out.println("================2.로그인   ================");
-		System.out.println("================3.순위    =================");
-		System.out.println("================4.종료    =================");
+		System.out.println("============ 메뉴를 선택하세요.===============");
+		System.out.println("============    1.회원가입 =================");
+		System.out.println("============    2.로그인   ================");
+		System.out.println("============    3.순위    =================");
+		System.out.println("============    4.종료    =================");
 		System.out.println("==========================================");
 
 	}
@@ -225,8 +225,8 @@ public class Menu {
 				break;
 			}
 			
-			Thread thread = new Print();
-	    	//thread.start();
+			//Thread thread = new Print();
+			//thread.start();
 			
 			// 불러온 다마고치로 게임시작!
 			System.out.println("선택하신 다마고치의 정보는 다음과 같습니다.\n" + damagochi.toString());
@@ -239,10 +239,10 @@ public class Menu {
 			System.out.println("===============6. 친구만나기  ===============");
 			System.out.println("===============7. 공부하기    ===============");
 			System.out.println("===============8. 종료      ================");
-			System.out.println("활동을 선택하세요 : ");
+			System.out.print("활동을 선택하세요 : ");
 			menu = sc.nextInt();
 			sc.nextLine();
-
+			//thread.stop();
 			try {
 				// 음식먹기
 				if(menu == 1) { 
