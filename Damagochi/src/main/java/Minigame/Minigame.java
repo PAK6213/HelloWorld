@@ -4,24 +4,32 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
+import Miniproject.Damagochi.StatePrint;
+
 public class Minigame {
 	Scanner sc = new Scanner(System.in);
-
+	StatePrint sp = new StatePrint();
 	public void UpDown () {
 		int randomNumber = (int)(Math.random()*10000) + 1;
 		int answerNumber;
 		boolean b = true;
-		System.out.println("숫자 맞추기 게임을시작합니다!!!!!!!!!");
-		System.out.println("숫자의 범위는 1~10000사이의 숫자입니다.");
+		System.out.println("숫자 맞추기 게임을시작합니다(범위는 1 ~ 10000)");
 		while(b) {
 			System.out.print("정답 숫자를 입력하세요 : ");
 			answerNumber = sc.nextInt();
 			sc.nextLine();
+
+			if(answerNumber > 10000 || answerNumber < 0) {
+				System.out.println("범위 밖의 숫자를 입력하였습니다.");
+				continue;
+			}
 			if(randomNumber == answerNumber) {
+				sp.clearScreen();
 				System.out.println("정답입니다. iq_exe가 15증가하였습니다.");
 				break;
 			} else if(randomNumber > answerNumber) {
@@ -55,16 +63,18 @@ public class Minigame {
 		char[] word = new char[answerWords.length()];
 
 		//메뉴
-
-		System.out.println("1.단어 학습하기");
-		System.out.println("2.단어 맞추기");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("               1.단어 학습하기");
+		System.out.println("               2.단어 맞추기");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.print("메뉴를 선택하세요 : ");
 		int menu = sc.nextInt();
 		sc.nextLine();
 
 		if(menu == 1) {
+			System.out.println("단어 학습을 시작합니다.");
 			for(int j = 0; j < words.length; j++) {
-				System.out.println(words[j]);
+				System.out.println(j + "번째 단어 : " + words[j]);
 				try {
 					Thread.sleep(400);
 				} catch (InterruptedException e) {
@@ -88,15 +98,47 @@ public class Minigame {
 
 			System.out.println("문제" + Arrays.toString(word) + "입니다.");
 
-			//정답 입력
+
+			int hintcount = 1;
+			// 문제안 메뉴
 			while(b) {
-				System.out.print("정답을 입력하세요 : ");
-				String myWord = sc.nextLine();
-				if(myWord.equals(answerWords)) {
-					System.out.println("정답입니다. iq_exe가 30증가하였습니다.");
-					break;
-				} else {
-					System.out.println("틀렸습니다. 다시입력하세요!");
+				int menu2 = 0;
+				
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("               1.정답입력 ");
+				System.out.println("               2.힌트");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.print("메뉴를 선택하세요 : ");
+				try {
+				menu2 = sc.nextInt();
+				sc.nextLine();
+				} catch(InputMismatchException e) {
+					System.out.println("숫자를 입력하세요!!");
+					menu2 = 0;
+				}
+
+				if(menu2 == 2) {
+					//힌트 
+					System.out.print("힌트 : ");
+					for(int j = 0 ; j < hintcount ; j++ ) {
+						char hint;
+						hint = answerWords.charAt(j);
+						System.out.print(hint);
+					}
+					System.out.println();
+					hintcount++;
+
+				} else if(menu2 == 1) {
+
+					System.out.print("정답을 입력하세요 : ");
+					String myWord = sc.nextLine();
+					if(myWord.equals(answerWords)) {
+						sp.clearScreen();
+						System.out.println("정답입니다. iq_exe가 30증가하였습니다.");
+						break;
+					} else {
+						System.out.println("틀렸습니다. 다시입력하세요!");
+					}
 				}
 			}
 		} 
@@ -120,8 +162,10 @@ public class Minigame {
 			e1.printStackTrace();
 		}
 		//메뉴
-		System.out.println("1.학습하기");
-		System.out.println("2.수도 맞추기");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("                1.학습하기");
+		System.out.println("                2.수도 맞추기");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.print("메뉴를 선택하세요 : ");
 		int menu = sc.nextInt();
 		sc.nextLine();
@@ -142,7 +186,7 @@ public class Minigame {
 			System.out.println("문제 : " + problem[random] + "의 수도는?");
 			while(true) {
 
-				
+
 				System.out.print("정답 : ");
 				String input = sc.nextLine();
 				if(input.equals(answer)) {
@@ -154,6 +198,8 @@ public class Minigame {
 			}
 		}
 	}
+
+
 }
 
 

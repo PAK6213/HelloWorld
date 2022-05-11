@@ -7,5 +7,7 @@ public interface Service {
 	int insertUser(User user);
 	// 로그인 기능
 	int loginuser(User user);
+	// 회원탈퇴
+	int Deleteuser(User user);
 	
 }
