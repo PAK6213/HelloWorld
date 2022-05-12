@@ -1,51 +1,28 @@
 package Miniproject.Damagochi;
 
+import Miniproject.Damagochi.Game.DamagochiSignUp;
+import Miniproject.Damagochi.Game.DamagochiSignUpImpl;
+import Miniproject.Damagochi.dto.Damagochi;
+
 public class Print extends Thread {
+	Damagochi damagochi = new Damagochi();
+	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
 	@Override
+	// 일정 시간이 지나면 체력 포만감 갈증 수치증가 후 업데이트 !!
 	public void run() {
-		for(int i = 0; i < 1000; i++) {
-			System.out.println("   ***     ");
-			System.out.println("  *****    ");
-			System.out.println("   ***     ");
-			System.out.println("    *      ");
-			System.out.println("   ***     ");
-			System.out.println("  * * *    ");
-			System.out.println("   * *     ");
-			System.out.println("  *   *    ");
+		while(true) {
+			
+			
 			try {
-				Thread.sleep(15000);
+				sleep(10000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("   ***     ");
-			System.out.println("  *****    ");
-			System.out.println("   ***     ");
-			System.out.println("    *      ");
-			System.out.println(" *******    ");
-			System.out.println("    *      ");
-			System.out.println("   * *     ");
-			System.out.println("  *   *    ");
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("   ***     ");
-			System.out.println("  *****    ");
-			System.out.println(" * *** *   ");
-			System.out.println("  * * *    ");
-			System.out.println("   ***     ");
-			System.out.println("    *      ");
-			System.out.println("   * *     ");
-			System.out.println("  *   *    ");
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			
 		}
+
 	}
+
 }

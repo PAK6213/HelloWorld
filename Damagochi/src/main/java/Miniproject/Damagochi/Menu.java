@@ -14,10 +14,6 @@ import Miniproject.Damagochi.dto.Damagochi;
 import Miniproject.Damagochi.dto.User;
 
 public class Menu {
-	//	// user의 정보를 담기위한 ArrayList
-	//	List<User> userlist = new ArrayList<User>();
-	//	// damagochi의 정보를 담기위한 ArrayList
-	//	List<Damagochi> damagochilist = new ArrayList<Damagochi>();
 	List<Damagochi> damagochis = new ArrayList<Damagochi>();
 	Service service = new ServiceImpl();
 	DamagochiService damagochiservice = new DamagochiImpl();
@@ -26,6 +22,8 @@ public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	private int menu;
 	StatePrint sp = new StatePrint();
+
+	
 
 	// main Menu 실행
 	public void main() {
@@ -112,6 +110,7 @@ public class Menu {
 				}else if(result == 1) {
 					sp.success();
 					System.out.println("정상적으로 ID가 생성되었습니다. 로그인 진행 후 이용해주세요.");
+					break;
 				}
 			} catch (Exception e) {
 				sp.warning();
@@ -297,8 +296,8 @@ public class Menu {
 				System.out.println("입력하신 다마고치가 존재하지 않습니다.");
 				break;
 			}
+			// 불러온 다마고치로 게임시작!  (여기 시점부터 쓰레드로 다마고치의 hp , 목마름, 포만감을 일정시간이 지날때마다 조정한다.)
 
-			// 불러온 다마고치로 게임시작!
 			try {
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("                          다마고치의 조건확인 \r\n"
@@ -373,5 +372,6 @@ public class Menu {
 		damagochi.setDamagochiName(damagochiName);
 		damagochisignup.deleteDamagochi(damagochi);
 	}
+
 
 }

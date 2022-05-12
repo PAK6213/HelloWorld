@@ -169,7 +169,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 
 	}
-
+	
 	public List<Damagochi> selectListDamagochi() {
 		// sql 쿼리문의 결과 데이터를 ArrayList에 담음.
 		List<Damagochi> damagochis = new ArrayList<Damagochi>();

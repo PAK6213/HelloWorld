@@ -43,6 +43,7 @@ public class DamagochiImpl implements DamagochiService {
 					sp.chicken();
 					System.out.println("치킨을 먹었습니다. 포만감 60 증가 하였습니다.");
 					damagochi.setSatiety(damagochi.getSatiety() + 60);
+					break;
 				} else if(menu == 3) {
 					sp.clearScreen();
 					sp.pizza();
@@ -51,7 +52,6 @@ public class DamagochiImpl implements DamagochiService {
 					break;
 				} else if(menu == 4) {
 					sp.clearScreen();
-
 					System.out.println("육회비빔밥을 먹었습니다. 포만감 45 증가 하였습니다.");
 					damagochi.setSatiety(damagochi.getSatiety() + 45);
 					break;
@@ -61,11 +61,7 @@ public class DamagochiImpl implements DamagochiService {
 					System.out.println("군고구마를 먹었습니다. 포만감 25 증가 하였습니다.");
 					damagochi.setSatiety(damagochi.getSatiety() + 25);
 					break;
-				} else {
-					sp.clearScreen();
-					System.out.println("음식먹기에 실패하였습니다.");
-					break;
-				}
+				} 
 			} catch (Exception e) {
 				sp.clearScreen();
 				sp.warning();
@@ -146,8 +142,8 @@ public class DamagochiImpl implements DamagochiService {
 		damagochi.setSatiety(damagochi.getSatiety() - 20);
 		damagochi.setThirst(damagochi.getThirst() + 15);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() + 1);
-		System.out.println("잠자기를 완료 했습니다. HP 100 상승!!");
 		sp.clearScreen();
+		System.out.println("잠자기를 완료 했습니다. HP 100 상승!!");
 		return damagochi;
 
 	}
@@ -256,6 +252,7 @@ public class DamagochiImpl implements DamagochiService {
 					System.out.println("친구와 영화보기를 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
 					break;
 				} else if(menu == 2) {
+					sp.pc();
 					sp.clearScreen();
 					System.out.println("친구와 PC방에서 게임을 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
 					break;
@@ -301,6 +298,7 @@ public class DamagochiImpl implements DamagochiService {
 				System.out.println("      1. 숫자 맞추기(UP & DOWN)");
 				System.out.println("      2. 단어 순서맞추기  ");
 				System.out.println("      3. 수도 맞추기 ");
+				System.out.println("      4. 끝말잇기");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.print("메뉴를 선택하세요 : ");
 				menu = Integer.parseInt(sc.nextLine());
@@ -320,6 +318,11 @@ public class DamagochiImpl implements DamagochiService {
 				} else if(menu == 3) {
 					//수도 맞추기
 					minigame.Capital();
+					damagochi.setIqExp(damagochi.getIqExp() + 30);
+					break;
+				} else if(menu == 4) {
+					//끝말잇기
+					minigame.endword();
 					damagochi.setIqExp(damagochi.getIqExp() + 30);
 					break;
 				}
