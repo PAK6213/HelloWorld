@@ -27,7 +27,7 @@ public class Damagochi {
 
 	@Override
 	public String toString() {
-		System.out.println("★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★");
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 		System.out.println(this.getDamagochiName() + "의 현재 상태입니다. 유의해서 진행해주세요!!!!!");
 		System.out.println("다마고치 이름 : " + this.getDamagochiName() + "  HP: " + this.getHp() 
 					+ "  포만감 : " + this.getSatiety() + "  목마름 : " 
@@ -37,7 +37,7 @@ public class Damagochi {
 					+ this.getHealthExp() + "  건강레벨 : " + this.getHealthLevel() 
 					+ "\n우울증수치 : " + this.getDepressionCount() + "  점수 : " 
 					+ this.getScore());
-		return "★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★"; 
+		return "■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■"; 
 	}
 	
 	

@@ -127,6 +127,10 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 			e.printStackTrace();
 		}	
+		
+		if(vo2.getUserId() == null) {
+			vo2.setUserId("****");
+		}
 
 
 		if(vo2.getUserId().equals(Menu.loginId)) {

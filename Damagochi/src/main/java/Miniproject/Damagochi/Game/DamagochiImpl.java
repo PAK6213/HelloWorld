@@ -7,7 +7,7 @@ import Miniproject.Damagochi.StatePrint;
 import Miniproject.Damagochi.dto.Damagochi;
 
 public class DamagochiImpl implements DamagochiService {
-	
+
 	StatePrint sp = new StatePrint();
 	Scanner sc = new Scanner(System.in);
 	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
@@ -17,52 +17,65 @@ public class DamagochiImpl implements DamagochiService {
 	public Damagochi eat(Damagochi damagochi) {
 		// 음식먹기
 		//satiety 증가(o) thirsty 증가(o) ,hp 감소(o),depressionCount(x)
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("         음식을 선택하세요.");
-		System.out.println("            1.냉면");
-		System.out.println("            2.치킨");
-		System.out.println("            3.피자");
-		System.out.println("            4.육회비빔밥");
-		System.out.println("            5.군고구마");
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		int menu = sc.nextInt();
-		sc.nextLine();
+		boolean b = true;
+		int menu;
+		while(b) {
 
-		if(menu == 1) {
-			sp.clearScreen();
-			sp.noddle();
-			System.out.println("냉면을 먹었습니다. 포만감 45 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 45);
-		} else if(menu == 2) {
-			sp.clearScreen();
-			sp.chicken();
-			System.out.println("치킨을 먹었습니다. 포만감 60 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 60);
-		} else if(menu == 3) {
-			sp.clearScreen();
-			sp.pizza();
-			System.out.println("피자를 먹었습니다. 포만감 55 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 55);
-		} else if(menu == 4) {
-			sp.clearScreen();
-			
-			System.out.println("육회비빔밥을 먹었습니다. 포만감 45 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 45);
-		} else if(menu == 5) {
-			sp.clearScreen();
-			sp.goguma();
-			System.out.println("군고구마를 먹었습니다. 포만감 25 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 25);
-		} else {
-			sp.clearScreen();
-			sp.bibimbob();
-			System.out.println("잘못입력했습니다. 음식을 먹지 못하였습니다.");
+			try {
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("            1.냉면");
+				System.out.println("            2.치킨");
+				System.out.println("            3.피자");
+				System.out.println("            4.육회비빔밥");
+				System.out.println("            5.군고구마");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.print("음식을 선택하세요 : ");
+				menu = Integer.parseInt(sc.nextLine());
+
+				if(menu == 1) {
+					sp.clearScreen();
+					sp.noddle();
+					System.out.println("냉면을 먹었습니다. 포만감 45 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 45);
+					break;
+				} else if(menu == 2) {
+					sp.clearScreen();
+					sp.chicken();
+					System.out.println("치킨을 먹었습니다. 포만감 60 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 60);
+				} else if(menu == 3) {
+					sp.clearScreen();
+					sp.pizza();
+					System.out.println("피자를 먹었습니다. 포만감 55 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 55);
+					break;
+				} else if(menu == 4) {
+					sp.clearScreen();
+
+					System.out.println("육회비빔밥을 먹었습니다. 포만감 45 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 45);
+					break;
+				} else if(menu == 5) {
+					sp.clearScreen();
+					sp.goguma();
+					System.out.println("군고구마를 먹었습니다. 포만감 25 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 25);
+					break;
+				} else {
+					sp.clearScreen();
+					System.out.println("음식먹기에 실패하였습니다.");
+					break;
+				}
+			} catch (Exception e) {
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+			}
 		}
 
 		damagochi.setThirst(damagochi.getThirst() + 15);
 		damagochi.setHp(damagochi.getHp() - 20);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() + 1);
-
 		return damagochi;
 	}
 
@@ -70,38 +83,52 @@ public class DamagochiImpl implements DamagochiService {
 	public Damagochi drinking(Damagochi damagochi) {
 		// 마시기  
 		// 종류에따른 satitey 증가,  thirst 감소,  hp 감소,depressionCount
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("          음식을 선택하세요.");
-		System.out.println("        1.물");
-		System.out.println("        2.커피");
-		System.out.println("        3.음료수");
-		System.out.println("        4.식혜");
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		int menu = sc.nextInt();
-		sc.nextLine();
+		boolean b = true;
+		int menu;
+		while(b) {
+			try {
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("        1.물");
+				System.out.println("        2.커피");
+				System.out.println("        3.음료수");
+				System.out.println("        4.식혜");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.print("마실것을 선택하세요 : ");
+				menu = Integer.parseInt(sc.nextLine());
 
-		if(menu == 1) {
-			sp.clearScreen();
-			sp.drinking();
-			System.out.println("물을 마셨습니다. 목마름 30 감소 하였습니다.");
-			damagochi.setThirst(damagochi.getThirst() - 30);
-		} else if(menu == 2) {
-			sp.clearScreen();
-			sp.drinking();
-			System.out.println("커피를 먹었습니다. 목마름 35 감소 하였습니다.");
-			damagochi.setThirst(damagochi.getThirst() - 35);
-		} else if(menu == 3) {
-			sp.clearScreen();
-			sp.drinking();
-			System.out.println("음료수를 먹었습니다. 목마름 30 감소, 포만감 10 증가 하였습니다.");
-			damagochi.setThirst(damagochi.getThirst() - 30);
-			damagochi.setSatiety(damagochi.getSatiety() + 10);
-		} else if(menu == 4) {
-			sp.clearScreen();
-			sp.drinking();
-			System.out.println("식혜를 먹었습니다. 목마름 40 감소, 포만감 15 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 15);
-			damagochi.setThirst(damagochi.getThirst() - 40);
+				if(menu == 1) {
+					sp.clearScreen();
+					sp.drinking();
+					System.out.println("물을 마셨습니다. 목마름 30 감소 하였습니다.");
+					damagochi.setThirst(damagochi.getThirst() - 30);
+					break;
+				} else if(menu == 2) {
+					sp.clearScreen();
+					sp.drinking();
+					System.out.println("커피를 먹었습니다. 목마름 35 감소 하였습니다.");
+					damagochi.setThirst(damagochi.getThirst() - 35);
+					break;
+				} else if(menu == 3) {
+					sp.clearScreen();
+					sp.drinking();
+					System.out.println("음료수를 먹었습니다. 목마름 30 감소, 포만감 10 증가 하였습니다.");
+					damagochi.setThirst(damagochi.getThirst() - 30);
+					damagochi.setSatiety(damagochi.getSatiety() + 10);
+					break;
+				} else if(menu == 4) {
+					sp.clearScreen();
+					sp.drinking();
+					System.out.println("식혜를 먹었습니다. 목마름 40 감소, 포만감 15 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 15);
+					damagochi.setThirst(damagochi.getThirst() - 40);
+					break;
+				}
+
+			} catch (Exception e) {
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+			}
 		}
 
 		damagochi.setHp(damagochi.getHp() - 20);
@@ -144,45 +171,58 @@ public class DamagochiImpl implements DamagochiService {
 	public Damagochi excercising(Damagochi damagochi) {
 		// 운동하기
 		// healthexp 증가 , hp 감소 , satitey 감소 , thirst 증가, socialexp 증가
-		
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("                1. 산책 ");
-		System.out.println("                2. 야구 ");
-		System.out.println("                3. 축구 ");
-		System.out.println("                4. 배드민턴 ");
-		System.out.println("                5. 수영 ");
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("운동을 선택하세요.");
-		int menu = sc.nextInt();
-		sc.nextLine();
+		boolean b = true;
+		int menu;
+		while(b) {
+			try {
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("                1. 산책 ");
+				System.out.println("                2. 야구 ");
+				System.out.println("                3. 축구 ");
+				System.out.println("                4. 배드민턴 ");
+				System.out.println("                5. 수영 ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("운동을 선택하세요.");
+				menu = Integer.parseInt(sc.nextLine());
 
-		if(menu == 1) {
-			sp.walking();
-			System.out.println("산책을 진행합니다.  건강 경험치가 30 증가 하였습니다.");
-			sp.clearScreen();
-			damagochi.setHealthExp(damagochi.getHealthExp() + 30);
-		} else if(menu == 2) {
-			sp.baseball();
-			System.out.println("야구을 진행합니다. 건강 경험치가 60 증가 하였습니다.");
-			sp.clearScreen();
-			damagochi.setHealthExp(damagochi.getHealthExp() + 60);
-		} else if(menu == 3) {
-			sp.sc();
-			System.out.println("축구를 진행합니다. 건강 경험치가 45 증가 하였습니다.");
-			sp.clearScreen();
-			damagochi.setHealthExp(damagochi.getHealthExp() + 45);
-		} else if(menu == 4) {
-			sp.badminton();
-			System.out.println("배드민턴을 진행합니다. 건강 경험치가 40 증가 하였습니다.");
-			sp.clearScreen();
-			damagochi.setHealthExp(damagochi.getHealthExp() + 40);
-		} else if(menu == 5) {
-			sp.swimming();
-			System.out.println("수영을 진행합니다. 건강 경험치가 50 증가 하였습니다.");
-			sp.clearScreen();
-			damagochi.setHealthExp(damagochi.getHealthExp() + 40);
-		} else {
-			System.out.println("메뉴를 잘못 선택하였습니다.");
+				if(menu == 1) {
+					sp.walking();
+					System.out.println("산책을 진행합니다.  건강 경험치가 30 증가 하였습니다.");
+					sp.clearScreen();
+					damagochi.setHealthExp(damagochi.getHealthExp() + 30);
+					break;
+				} else if(menu == 2) {
+					sp.baseball();
+					System.out.println("야구을 진행합니다. 건강 경험치가 60 증가 하였습니다.");
+					sp.clearScreen();
+					damagochi.setHealthExp(damagochi.getHealthExp() + 60);
+					break;
+				} else if(menu == 3) {
+					sp.sc();
+					System.out.println("축구를 진행합니다. 건강 경험치가 45 증가 하였습니다.");
+					sp.clearScreen();
+					damagochi.setHealthExp(damagochi.getHealthExp() + 45);
+					break;
+				} else if(menu == 4) {
+					sp.badminton();
+					System.out.println("배드민턴을 진행합니다. 건강 경험치가 40 증가 하였습니다.");
+					sp.clearScreen();
+					damagochi.setHealthExp(damagochi.getHealthExp() + 40);
+					break;
+				} else if(menu == 5) {
+					sp.swimming();
+					System.out.println("수영을 진행합니다. 건강 경험치가 50 증가 하였습니다.");
+					sp.clearScreen();
+					damagochi.setHealthExp(damagochi.getHealthExp() + 40);
+					break;
+				} else {
+					System.out.println("메뉴를 잘못 선택하였습니다.");
+				}
+			}catch (Exception e) {
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+			}
 		}
 		damagochi.setSatiety(damagochi.getSatiety() - 30);
 		damagochi.setThirst(damagochi.getThirst() + 25);
@@ -191,41 +231,53 @@ public class DamagochiImpl implements DamagochiService {
 		damagochi.setDepressionCount(damagochi.getDepressionCount() - 2);
 
 		return damagochi;
+
 	}
 
 	@Override
 	public Damagochi friendmeeting(Damagochi damagochi) {
 		// 친구만나기 
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("              1. 영화보기 ");
-		System.out.println("              2. PC방 ");
-		System.out.println("              3. 음식먹기 ");
-		System.out.println("              4. 쇼핑 ");
-		System.out.println("              5. 뮤지컬보기 ");
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		
-		System.out.println("친구와 하고싶은 활동을 선택하세요.");
-		int menu = sc.nextInt();
-		sc.nextLine();
+		boolean b = true;
+		int menu;
+		while(b) {
+			try {
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("              1. 영화보기 ");
+				System.out.println("              2. PC방 ");
+				System.out.println("              3. 음식먹기 ");
+				System.out.println("              4. 쇼핑 ");
+				System.out.println("              5. 뮤지컬보기 ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("친구와 하고싶은 활동을 선택하세요.");
+				menu = Integer.parseInt(sc.nextLine());
 
-		if(menu == 1) {
-			sp.clearScreen();
-			System.out.println("친구와 영화보기를 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
-		} else if(menu == 2) {
-			sp.clearScreen();
-			System.out.println("친구와 PC방에서 게임을 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
-		} else if(menu == 3) {
-			sp.clearScreen();
-			System.out.println("친구와 음식먹기를 진행합니다. 포만감 40 증가, 사회성 경험치가 40 증가 하였습니다.");
-			damagochi.setSatiety(damagochi.getSatiety() + 40);
-		} else if(menu == 4) {
-			sp.clearScreen();
-			System.out.println("친구와 쇼핑을 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
-		} else if(menu == 5) {
-			sp.clearScreen();
-			System.out.println("친구와 뮤지컬 보기를 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
-		} else {
-			System.out.println("메뉴를 잘못 선택하였습니다.");
+				if(menu == 1) {
+					sp.clearScreen();
+					System.out.println("친구와 영화보기를 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
+					break;
+				} else if(menu == 2) {
+					sp.clearScreen();
+					System.out.println("친구와 PC방에서 게임을 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
+					break;
+				} else if(menu == 3) {
+					sp.clearScreen();
+					System.out.println("친구와 음식먹기를 진행합니다. 포만감 40 증가, 사회성 경험치가 40 증가 하였습니다.");
+					damagochi.setSatiety(damagochi.getSatiety() + 40);
+					break;
+				} else if(menu == 4) {
+					sp.clearScreen();
+					System.out.println("친구와 쇼핑을 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
+					break;
+				} else if(menu == 5) {
+					sp.clearScreen();
+					System.out.println("친구와 뮤지컬 보기를 진행합니다.  사회성 경험치가 40 증가 하였습니다.");
+					break;
+				}
+			}catch (Exception e) {
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+			}
 		}
 
 		damagochi.setSatiety(damagochi.getSatiety() - 20);
@@ -241,28 +293,42 @@ public class DamagochiImpl implements DamagochiService {
 	@Override
 	public Damagochi studying(Damagochi damagochi) {
 		// 공부하기
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("      1. 숫자 맞추기(UP & DOWN)");
-		System.out.println("      2. 단어 순서맞추기  ");
-		System.out.println("      3. 수도 맞추기 ");
-		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.print("메뉴를 선택하세요 : ");
-		int menu = sc.nextInt();
-		sc.nextLine();
-		//숫자 맞추기(UP & DOWN)
-		if(menu == 1) {
-			minigame.UpDown();
-			damagochi.setIqExp(damagochi.getIqExp() + 15);
-			//단어 순서 맞추기
-		} else if(menu == 2) {
-			minigame.word();
-			damagochi.setIqExp(damagochi.getIqExp() + 30);
-		} else if(menu == 3) {
-			//수도 맞추기
-			minigame.Capital();
-			damagochi.setIqExp(damagochi.getIqExp() + 30);
+		boolean b = true;
+		int menu;
+		while(b) {
+			try {
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("      1. 숫자 맞추기(UP & DOWN)");
+				System.out.println("      2. 단어 순서맞추기  ");
+				System.out.println("      3. 수도 맞추기 ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.print("메뉴를 선택하세요 : ");
+				menu = Integer.parseInt(sc.nextLine());
+
+				//숫자 맞추기(UP & DOWN)
+				if(menu == 1) {
+					minigame.UpDown();
+					damagochi.setIqExp(damagochi.getIqExp() + 15);
+					sp.clearScreen();
+					System.out.println("");
+					break;
+					//단어 순서 맞추기
+				} else if(menu == 2) {
+					minigame.word();
+					damagochi.setIqExp(damagochi.getIqExp() + 30);
+					break;
+				} else if(menu == 3) {
+					//수도 맞추기
+					minigame.Capital();
+					damagochi.setIqExp(damagochi.getIqExp() + 30);
+					break;
+				}
+			}catch (Exception e) {
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+			}
 		}
-		
 		damagochi.setSatiety(damagochi.getSatiety() - 20);
 		damagochi.setThirst(damagochi.getThirst() + 15);
 		damagochi.setHp(damagochi.getHp() - 20);
@@ -308,7 +374,7 @@ public class DamagochiImpl implements DamagochiService {
 			sp.warning();
 			System.out.println(damagochi.getDamagochiName() + "가 목이마릅니다.");
 			if(damagochi.getThirst() > 150) {
-				
+
 				return check;
 			}
 		}
@@ -317,35 +383,35 @@ public class DamagochiImpl implements DamagochiService {
 			damagochi.setHealthExp(damagochi.getHealthExp() % 70);
 			sp.levelup();
 			System.out.println(damagochi.getDamagochiName() + "의 Health_level이 증가하였습니다.");
-			
+
 		}
 		if(damagochi.getSocialExp() > damagochi.getSocialLevel() * 70) {
 			damagochi.setSocialLevel(damagochi.getSocialLevel() + 1);
 			damagochi.setSocialExp(damagochi.getSocialExp() % 70);
 			sp.levelup();
 			System.out.println(damagochi.getDamagochiName() + "의 Social_level이 증가하였습니다.");
-			
+
 		}
 		if(damagochi.getIqExp() > damagochi.getIqLevel() * 70) {
 			damagochi.setIqLevel(damagochi.getIqLevel() + 1);
 			damagochi.setIqExp(damagochi.getIqExp() % 70);
 			sp.levelup();
 			System.out.println(damagochi.getDamagochiName() + "의 Iq_level이 증가하였습니다.");
-			
+
 		}
-		
+
 		if(damagochi.getDepressionCount() < 0) {
 			damagochi.setDepressionCount(0);
 		}
-		
+
 		if(damagochi.getHp() > 100) {
 			damagochi.setHp(100);
 		}
-		
+
 		if(damagochi.getThirst() < 0) {
 			damagochi.setThirst(0);
 		}
-		
+
 		if(damagochi.getSatiety() > 100) {
 			damagochi.setSatiety(100);
 		}

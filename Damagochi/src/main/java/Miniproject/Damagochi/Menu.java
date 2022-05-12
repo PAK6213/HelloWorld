@@ -29,7 +29,7 @@ public class Menu {
 
 	// main Menu 실행
 	public void main() {
-		sp.mainTitle();
+		//sp.mainTitle();
 		boolean b = true;
 		sp.clearScreen();
 		while(b) {
@@ -42,7 +42,7 @@ public class Menu {
 
 			} catch (Exception e) {
 				sp.clearScreen();
-				System.out.println("숫자를 입력해주세요");
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
 
 			}
 			if(menu == 1) { // 회원 가입.
@@ -54,18 +54,16 @@ public class Menu {
 			} else if(menu == 4) {
 				delete();
 			} else if(menu == 5) {
-				sp.clearScreen();
 				sp.bye();
 				break;
 			} else {
-				System.out.println("잘못입력했습니다.");
 
 			}
 		} 
 	}
 
 
-	
+
 	// first MenuTitle
 	private void menuTitle() {
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
@@ -80,38 +78,51 @@ public class Menu {
 	}
 	// 회원가입 
 	private void signUp() {
-		sp.clearScreen();
-		int result;
-		User user = new User();
-		System.out.println("●●●●●●●●●●●●●●●●●●");
-		System.out.println("●●●●● 회원가입 ●●●●●");
-		System.out.println("●●●●●●●●●●●●●●●●●●");
-		System.out.print("ID를 입력하세요 : ");
-		String userId = sc.nextLine();
-		user.setUserId(userId);
-		System.out.print("PassWord를 입력하세요 : ");
-		String password = sc.nextLine();
-		user.setPassword(password);
-		System.out.print("Age를 입력하세요 : ");
-		int age = sc.nextInt();
-		sc.nextLine();
-		user.setAge(age);
-		System.out.print("BirthDay를 입력하세요 : ");
-		String birthDay = sc.nextLine();
-		user.setBirthDay(birthDay);
-		System.out.print("Tel을 입력하세요 : ");
-		String tel = sc.nextLine();
-		user.setTel(tel);
-		sp.process();
-		// 각 정보를 입력받아서 insert
-		result = service.insertUser(user);
-		//1 : 정상가입  2 : 중복으로인해 가입실패
-		if(result == 2) {
-			sp.Fail();
-			System.out.println("이미 가입된 ID가 있습니다.");
-		}else if(result == 1) {
-			sp.success();
-			System.out.println("정상적으로 ID가 생성되었습니다. 로그인 진행 후 이용해주세요.");
+		boolean b = true;
+		while(b) {
+			try {
+				sp.clearScreen();
+				int result;
+				User user = new User();
+				System.out.println("●●●●●●●●●●●●●●●●●●");
+				System.out.println("●●●●● 회원가입 ●●●●●");
+				System.out.println("●●●●●●●●●●●●●●●●●●");
+				System.out.print("ID를 입력하세요 : ");
+				String userId = sc.nextLine();
+				user.setUserId(userId);
+				System.out.print("PassWord를 입력하세요 : ");
+				String password = sc.nextLine();
+				user.setPassword(password);
+				System.out.print("Age를 입력하세요 : ");
+				int age = Integer.parseInt(sc.nextLine());
+				user.setAge(age);
+				System.out.print("BirthDay를 입력하세요 : ");
+				String birthDay = sc.nextLine();
+				user.setBirthDay(birthDay);
+				System.out.print("Tel을 입력하세요 : ");
+				String tel = sc.nextLine();
+				user.setTel(tel);
+				sp.process();
+				// 각 정보를 입력받아서 insert
+				result = service.insertUser(user);
+				//1 : 정상가입  2 : 중복으로인해 가입실패
+				if(result == 2) {
+					sp.Fail();
+					System.out.println("이미 가입된 ID가 있습니다.");
+				}else if(result == 1) {
+					sp.success();
+					System.out.println("정상적으로 ID가 생성되었습니다. 로그인 진행 후 이용해주세요.");
+				}
+			} catch (Exception e) {
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -132,7 +143,6 @@ public class Menu {
 			result = service.loginuser(user);
 			//0 : 비밀번호 오류  1 : 접속완료  2 : ID 생성이 되지 않음.
 			if(result == 1) {
-
 				damagochiMenu();
 				break;
 			} else if(result == 2) {
@@ -197,25 +207,22 @@ public class Menu {
 
 
 	private void damagochiMenu() {
-
-
 		boolean b = true;
 		while(b) {
-			System.out.println("");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-			System.out.println("■         다마고치 게임을 시작합니다.          ■");
-			System.out.println("■            1.다마고치 생성                ■");
-			System.out.println("■            2.다마고치 불러오기             ■");
-			System.out.println("■            3.다마고치 삭제                ■");
-			System.out.println("■            4.이전메뉴                    ■");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-			System.out.print("이용하실 메뉴를 입력하세요 : ");
-			menu = sc.nextInt();
-			sc.nextLine();
-
-
-
 			try {
+				System.out.println("");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("■         다마고치 게임을 시작합니다.          ■");
+				System.out.println("■            1.다마고치 생성                ■");
+				System.out.println("■            2.다마고치 불러오기             ■");
+				System.out.println("■            3.다마고치 삭제                ■");
+				System.out.println("■            4.이전메뉴                    ■");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.print("이용하실 메뉴를 입력하세요 : ");
+
+				menu = Integer.parseInt(sc.nextLine());
+
+
 				if(menu == 1) { 
 					// 다마고치 생성
 					sp.clearScreen();
@@ -237,11 +244,12 @@ public class Menu {
 					break;
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
+
 			}
 		}
-
-
 	}
 
 	// 이름은 입력받고 나머지 변수는 기본값으로 적용.
@@ -271,14 +279,6 @@ public class Menu {
 
 		boolean b = true;
 		while(b) {
-			/* 다마고치의 조건확인 
-			1. 활동을 한번 할 때 satiety 감소 , thirst 증가는 무조건 이루어진다.
-			2. 잠자기 및 휴식을 제외한 활동은 hp가 감소한다.
-			3. 다른 활동을 3번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 5번 초과시 실패 한다. !!
-			4. hp (0미만시 경고 -50 실패)
-			5. satiety (0미만 시 경고 -50 실패)
-			6. thirst (100초과 시 경고 150 실패)*/
-
 
 			// 메뉴가 한번 수행되고 나서 다마고치의 성공 실패 조건을 수행한 뒤 업데이트
 			// 다마고치가 조건으로 실패했을경우 해당 다마고치를 삭제하고 이전메뉴로이동.
@@ -299,24 +299,34 @@ public class Menu {
 			}
 
 			// 불러온 다마고치로 게임시작!
-			System.out.println(damagochi.toString());
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-			System.out.println("               게임을 시작합니다               ");
-			System.out.println("               1. 음식먹기                   ");
-			System.out.println("               2. 마시기                 	   ");
-			System.out.println("               3. 잠자기     				   ");
-			System.out.println("               4. 휴식하기    ");
-			System.out.println("               5. 운동하기    ");
-			System.out.println("               6. 친구만나기  ");
-			System.out.println("               7. 공부하기   ");
-			System.out.println("               8. 종료      ");
-			System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-			System.out.print("활동을 선택하세요 : ");
-			menu = sc.nextInt();
-			sc.nextLine();
-			sp.clearScreen();
-			//thread.stop();
 			try {
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("                          다마고치의 조건확인 \r\n"
+						+ "1. 활동을 한번 할 때 satiety 감소 , thirst 증가는 무조건 이루어진다.\r\n"
+						+ "2. 잠자기 및 휴식을 제외한 활동은 hp가 감소한다.\r\n"
+						+ "3. 다른 활동을 3번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 5번 초과시 실패 한다.\r\n"
+						+ "4. hp (0미만시 경고 -50 실패)\r\n"
+						+ "5. satiety (0미만 시 경고 -50 실패)\r\n"
+						+ "6. thirst (100초과 시 경고 150 실패)\r\n"
+						+ "7. 위의 조건을 만족하면서 iq_level, health_level, social_level을 올려 합산 스코어를 랭킹에 반영한다.");
+				System.out.println(damagochi.toString());
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.println("               게임을 시작합니다               ");
+				System.out.println("               1. 음식먹기                   ");
+				System.out.println("               2. 마시기                 	   ");
+				System.out.println("               3. 잠자기     				   ");
+				System.out.println("               4. 휴식하기    ");
+				System.out.println("               5. 운동하기    ");
+				System.out.println("               6. 친구만나기  ");
+				System.out.println("               7. 공부하기   ");
+				System.out.println("               8. 종료      ");
+				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+				System.out.print("활동을 선택하세요 : ");
+
+				menu = Integer.parseInt(sc.nextLine());
+				sp.clearScreen();
+
+				//thread.stop();
 				// 음식먹기
 				if(menu == 1) { 
 					damagochi = damagochiservice.eat(damagochi);
@@ -346,12 +356,15 @@ public class Menu {
 				} else {
 					System.out.println("잘못 입력 하였습니다.");
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch(Exception e) {
+				sp.clearScreen();
+				sp.warning();
+				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
 			}
 		}
-
 	}
+
+
 	private void damagochidelete () {
 		Damagochi damagochi = new Damagochi();
 		System.out.print("삭제할 다마고치의 이름을 입력하세요 : ");
