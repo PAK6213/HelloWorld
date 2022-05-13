@@ -194,5 +194,28 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 		}
 		return damagochis;
 	}
+	
+	public List<Damagochi> DamagochiNameList() {
+		List<Damagochi> damagochis = new ArrayList<Damagochi>();
+		Damagochi vo;
+		String sql = "SELECT USER_ID ,DAMAGOCHI_NAME FROM DAMAGOCHI WHERE USER_ID = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, Menu.loginId);
+			result = psmt.executeQuery();
+
+			while(result.next()) {
+				vo = new Damagochi();
+				vo.setUserId(result.getString("USER_ID"));
+				vo.setDamagochiName(result.getString("DAMAGOCHI_NAME"));
+				damagochis.add(vo);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return damagochis;
+	}
 
 }

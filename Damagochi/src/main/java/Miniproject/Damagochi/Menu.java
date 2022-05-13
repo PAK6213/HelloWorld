@@ -27,7 +27,7 @@ public class Menu {
 
 	// main Menu 실행
 	public void main() {
-		//sp.mainTitle();
+		sp.mainTitle();
 		boolean b = true;
 		sp.clearScreen();
 		while(b) {
@@ -163,7 +163,7 @@ public class Menu {
 		System.out.println("■■■■■■■■■■■■■■ 순위 ■■■■■■■■■■■■■■■■");
 		System.out.println("■     user_id          score      ■");
 		for(Damagochi da : damagochis) {
-			System.out.printf("■%d등 %-10s           %3d점\t  ■\n",rank,da.getUserId(),da.getScore());
+			System.out.printf("■%d등 %-10s           %-3d점\t  ■\n",rank,da.getUserId(),da.getScore());
 			rank++;
 		}
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
@@ -215,7 +215,8 @@ public class Menu {
 				System.out.println("■            1.다마고치 생성                ■");
 				System.out.println("■            2.다마고치 불러오기             ■");
 				System.out.println("■            3.다마고치 삭제                ■");
-				System.out.println("■            4.이전메뉴                    ■");
+				System.out.println("■            4.다마고치 목록                ■");
+				System.out.println("■            5.로그아웃                    ■");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.print("이용하실 메뉴를 입력하세요 : ");
 
@@ -238,6 +239,10 @@ public class Menu {
 					damagochidelete();
 
 				} else if(menu == 4) {
+					// 다마고치 목록
+					sp.clearScreen();
+					damagochilist();
+				} else if(menu == 5) {
 					//이전메뉴로 돌아가기.
 					sp.clearScreen();
 					break;
@@ -249,6 +254,18 @@ public class Menu {
 
 			}
 		}
+	}
+	
+	public void damagochilist() {
+		List<Damagochi> damagochis2 = new ArrayList<Damagochi>();
+		damagochis2 = damagochisignup.DamagochiNameList();
+		
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
+		System.out.println("      user_id          damagochi_name       ");
+		for(Damagochi da : damagochis2) {
+			System.out.printf("      %-10s           %-10s\n",da.getUserId(),da.getDamagochiName());
+		}
+		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 	}
 
 	// 이름은 입력받고 나머지 변수는 기본값으로 적용.
@@ -301,12 +318,12 @@ public class Menu {
 			try {
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("                          다마고치의 조건확인 \r\n"
-						+ "1. 활동을 한번 할 때 satiety 감소 , thirst 증가는 무조건 이루어진다.\r\n"
+						+ "1. 활동을 한번 할 때 포만감 감소 , 목마름 증가는 무조건 이루어진다.\r\n"
 						+ "2. 잠자기 및 휴식을 제외한 활동은 hp가 감소한다.\r\n"
-						+ "3. 다른 활동을 3번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 5번 초과시 실패 한다.\r\n"
+						+ "3. 다른 활동을 5번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 6번 초과시 실패 한다.\r\n"
 						+ "4. hp (0미만시 경고 -50 실패)\r\n"
-						+ "5. satiety (0미만 시 경고 -50 실패)\r\n"
-						+ "6. thirst (100초과 시 경고 150 실패)\r\n"
+						+ "5. 포만감 (0미만 시 경고 -50 실패)\r\n"
+						+ "6. 목마름 (100초과 시 경고 150 실패)\r\n"
 						+ "7. 위의 조건을 만족하면서 iq_level, health_level, social_level을 올려 합산 스코어를 랭킹에 반영한다.");
 				System.out.println(damagochi.toString());
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");

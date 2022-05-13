@@ -156,7 +156,7 @@ public class DamagochiImpl implements DamagochiService {
 
 		damagochi.setSatiety(damagochi.getSatiety() - 20);
 		damagochi.setThirst(damagochi.getThirst() + 15);
-		damagochi.setHp(damagochi.getHp() - 20);
+		damagochi.setHp(damagochi.getHp() + 50);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() + 1);
 		sp.clearScreen();
 		return damagochi;

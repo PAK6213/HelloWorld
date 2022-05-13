@@ -43,11 +43,11 @@ public class Minigame {
 
 	public void word() {
 		break1 = 3;
-		String[] words = new String[55];
+		String[] words = new String[144];
 		int num = 0;
 		// 파일을 읽어와서 words배열 각 값을 저장.
 		try {
-			Scanner scanner = new Scanner(new File("C:\\Users\\admin\\Desktop\\word.txt"));
+			Scanner scanner = new Scanner(new File("C:\\Users\\admin\\Desktop\\word2.txt"));
 			while (scanner.hasNext()) {
 				String str = scanner.next();
 				words[num] = str;
@@ -58,7 +58,7 @@ public class Minigame {
 			e1.printStackTrace();
 		}
 
-		int i = (int)(Math.random() * 54) + 1;   // 0 ~ 54
+		int i = (int)(Math.random() * 144) + 1;   // 0 ~ 54
 		String answerWords = words[i];
 		char temp;
 		boolean b = true;
@@ -80,7 +80,7 @@ public class Minigame {
 					for(int j = 0; j < words.length; j++) {
 						System.out.println(j+1 + "번째 단어 : " + words[j]);
 						try {
-							Thread.sleep(400);
+							Thread.sleep(200);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
@@ -234,10 +234,8 @@ public class Minigame {
 
 	//영어 단어를 파일로 읽어와서 배열에 저장  이어서
 	public void endword() {
-
 		char youLastChar;
-		
-		String[] words = new String[76];
+		String[] words = new String[144];
 		int num = 0;
 		int count = 0;
 		// 파일을 읽어와서 words배열 각 값을 저장.
@@ -257,7 +255,8 @@ public class Minigame {
 		boolean b = true;
 		System.out.println("끝말잇기를 시작합니다!!!!");
 		// 상대방이 나에게 첫 단어를 던져줌.
-		int random = (int)(Math.random()*76) + 1;
+		
+		int random = (int)(Math.random()*144) + 1;
 		System.out.println("상대방> " + words[random]);
 		
 		youLastChar = words[random].charAt(words[random].length()-1);
@@ -269,25 +268,22 @@ public class Minigame {
 			String my = sc.nextLine();
 			
 			if(my.charAt(0) != youLastChar) {
-				System.out.println("lose!!");
-				break;
+				System.out.println("게임 rule에 유의해서 입력하세요!!");
+				continue;
 			}
 			
 			// 상대방은 내 단어의 마지막 자리의 문자를 알아내고 자신이 가진 words 에서 찾아내서 대답함. 
 			char lastChar = (char) (my.charAt(my.length() -1));
 
-			for(int i = 0; i < 200; i++) {
-				int random2 = (int)(Math.random()*76) + 1;
+			for(int i = 0; i < 10000; i++) {
+				int random2 = (int)(Math.random() * 144) + 1;
 				if(words[random2].charAt(0) == lastChar) {
 					System.out.println("상대방> " + words[random2]);
 					youLastChar = (char) (words[random2].charAt(words[random2].length() -1));
 					break;
 				}
-				
-				
 			}
-			
-			if(count > 30) {
+			if(count > 5) {
 				System.out.println("이겼습니다.");
 				break;
 			}

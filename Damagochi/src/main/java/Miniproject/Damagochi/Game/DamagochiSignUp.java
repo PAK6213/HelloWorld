@@ -15,4 +15,6 @@ public interface DamagochiSignUp {
 		Damagochi readDamagochi(Damagochi damagochi);
 		// 다마고치 랭크
 		public List<Damagochi> selectListDamagochi();
+		
+		public List<Damagochi> DamagochiNameList();
 }
