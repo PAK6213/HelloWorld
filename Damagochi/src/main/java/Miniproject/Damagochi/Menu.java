@@ -287,7 +287,8 @@ public class Menu {
 		int check = 0;
 		Damagochi damagochi = new Damagochi();
 		System.out.print("불러올 다마고치의 이름을 입력하세요 : ");
-		damagochiName = sc.nextLine();
+		String name = sc.nextLine();
+		damagochiName = name;
 		sp.process();
 		damagochi.setDamagochiName(damagochiName);
 		damagochi = damagochisignup.readDamagochi(damagochi);
@@ -295,7 +296,7 @@ public class Menu {
 
 		boolean b = true;
 		while(b) {
-
+            // 음식을 먹었는데 여기 와일문을 탈출함..
 			// 메뉴가 한번 수행되고 나서 다마고치의 성공 실패 조건을 수행한 뒤 업데이트
 			// 다마고치가 조건으로 실패했을경우 해당 다마고치를 삭제하고 이전메뉴로이동.
 			damagochisignup.updateDamagochi(damagochi);
@@ -315,7 +316,6 @@ public class Menu {
 			}
 			// 불러온 다마고치로 게임시작!  (여기 시점부터 쓰레드로 다마고치의 hp , 목마름, 포만감을 일정시간이 지날때마다 조정한다.)
 			Pr.start();
-				
 			
 			try {
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
