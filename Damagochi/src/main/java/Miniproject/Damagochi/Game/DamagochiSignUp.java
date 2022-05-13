@@ -17,4 +17,6 @@ public interface DamagochiSignUp {
 		public List<Damagochi> selectListDamagochi();
 		
 		public List<Damagochi> DamagochiNameList();
+		// 스레드에서 다마고치 정보 불러오기
+		public Damagochi readDamagochi2(String name);
 }

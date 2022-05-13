@@ -69,8 +69,6 @@ public class DamagochiImpl implements DamagochiService {
 			}
 		}
 
-		damagochi.setThirst(damagochi.getThirst() + 15);
-		damagochi.setHp(damagochi.getHp() - 20);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() + 1);
 		return damagochi;
 	}
@@ -127,7 +125,6 @@ public class DamagochiImpl implements DamagochiService {
 			}
 		}
 
-		damagochi.setHp(damagochi.getHp() - 20);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() + 1);
 		return damagochi;
 
@@ -153,9 +150,6 @@ public class DamagochiImpl implements DamagochiService {
 		// 휴식하기
 
 		System.out.println("휴식을 진행합니다.");
-
-		damagochi.setSatiety(damagochi.getSatiety() - 20);
-		damagochi.setThirst(damagochi.getThirst() + 15);
 		damagochi.setHp(damagochi.getHp() + 50);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() + 1);
 		sp.clearScreen();
@@ -220,11 +214,9 @@ public class DamagochiImpl implements DamagochiService {
 				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
 			}
 		}
-		damagochi.setSatiety(damagochi.getSatiety() - 30);
-		damagochi.setThirst(damagochi.getThirst() + 25);
-		damagochi.setHp(damagochi.getHp() - 30);
+
 		damagochi.setSocialExp(damagochi.getSocialExp() + 10);
-		damagochi.setDepressionCount(damagochi.getDepressionCount() - 2);
+		damagochi.setDepressionCount(damagochi.getDepressionCount() - 1);
 
 		return damagochi;
 
@@ -277,9 +269,6 @@ public class DamagochiImpl implements DamagochiService {
 			}
 		}
 
-		damagochi.setSatiety(damagochi.getSatiety() - 20);
-		damagochi.setThirst(damagochi.getThirst() + 15);
-		damagochi.setHp(damagochi.getHp() - 20);
 		damagochi.setSocialExp(damagochi.getSocialExp() + 40);
 		damagochi.setDepressionCount(damagochi.getDepressionCount() - 3);
 

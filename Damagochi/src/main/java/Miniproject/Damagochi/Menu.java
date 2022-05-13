@@ -19,15 +19,17 @@ public class Menu {
 	DamagochiService damagochiservice = new DamagochiImpl();
 	DamagochiSignUp damagochisignup = new DamagochiSignUpImpl();
 	public static String loginId = "";
+	public static String damagochiName ="";
 	private Scanner sc = new Scanner(System.in);
 	private int menu;
 	StatePrint sp = new StatePrint();
+	Print Pr = new Print();
 
 	
 
 	// main Menu 실행
 	public void main() {
-		sp.mainTitle();
+		//sp.mainTitle();
 		boolean b = true;
 		sp.clearScreen();
 		while(b) {
@@ -249,9 +251,7 @@ public class Menu {
 				}
 			} catch (Exception e) {
 				sp.clearScreen();
-				sp.warning();
-				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
-
+				
 			}
 		}
 	}
@@ -287,7 +287,7 @@ public class Menu {
 		int check = 0;
 		Damagochi damagochi = new Damagochi();
 		System.out.print("불러올 다마고치의 이름을 입력하세요 : ");
-		String damagochiName = sc.nextLine();
+		damagochiName = sc.nextLine();
 		sp.process();
 		damagochi.setDamagochiName(damagochiName);
 		damagochi = damagochisignup.readDamagochi(damagochi);
@@ -314,17 +314,18 @@ public class Menu {
 				break;
 			}
 			// 불러온 다마고치로 게임시작!  (여기 시점부터 쓰레드로 다마고치의 hp , 목마름, 포만감을 일정시간이 지날때마다 조정한다.)
-
+			Pr.start();
+				
+			
 			try {
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("                          다마고치의 조건확인 \r\n"
-						+ "1. 활동을 한번 할 때 포만감 감소 , 목마름 증가는 무조건 이루어진다.\r\n"
-						+ "2. 잠자기 및 휴식을 제외한 활동은 hp가 감소한다.\r\n"
-						+ "3. 다른 활동을 5번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 6번 초과시 실패 한다.\r\n"
-						+ "4. hp (0미만시 경고 -50 실패)\r\n"
-						+ "5. 포만감 (0미만 시 경고 -50 실패)\r\n"
-						+ "6. 목마름 (100초과 시 경고 150 실패)\r\n"
-						+ "7. 위의 조건을 만족하면서 iq_level, health_level, social_level을 올려 합산 스코어를 랭킹에 반영한다.");
+						+ "1. 30초마다 포만감 20 감소 , 목마름 15 증가 , HP 20감소가 이루어진다.\r\n"
+						+ "2. 다른 활동을 5번이상 할 때 친구를 만나지 않으면 우울증 경고를 받으며 6번 초과시 실패 한다.\r\n"
+						+ "3. hp (0미만시 경고 -50 실패)\r\n"
+						+ "4. 포만감 (0미만 시 경고 -50 실패)\r\n"
+						+ "5. 목마름 (100초과 시 경고 150 실패)\r\n"
+						+ "6. 위의 조건을 만족하면서 iq_level, health_level, social_level을 올려 합산 스코어를 랭킹에 반영한다.");
 				System.out.println(damagochi.toString());
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("               게임을 시작합니다               ");
@@ -367,15 +368,13 @@ public class Menu {
 					// 종료
 				} else if(menu == 8) {
 					System.out.println("다마고치 게임을 종료합니다.");
-					//thread.stop();
+					Pr.stop();
 					break;
 				} else {
 					System.out.println("잘못 입력 하였습니다.");
 				}
 			} catch(Exception e) {
 				sp.clearScreen();
-				sp.warning();
-				System.out.println("숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! 숫자를 입력하세요! ");
 			}
 		}
 	}
