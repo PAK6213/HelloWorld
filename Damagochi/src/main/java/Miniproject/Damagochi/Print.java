@@ -19,7 +19,7 @@ public class Print extends Thread {
 		damagochi = damagochisignup.readDamagochi2(Menu.damagochiName);
 		while(true) {
 			try {
-				Thread.sleep(20000);
+				Thread.sleep(40000);
 				damagochi.setHp(damagochi.getHp() - 20);	
 				//System.out.println("5초경과로 HP가 20 감소하였습니다.");
 				damagochi.setThirst(damagochi.getThirst() + 15);	

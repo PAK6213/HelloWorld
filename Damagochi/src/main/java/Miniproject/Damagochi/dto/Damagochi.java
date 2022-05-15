@@ -1,8 +1,8 @@
 package Miniproject.Damagochi.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-@AllArgsConstructor
+
+
 @Data
 public class Damagochi {
 	//멤버변수

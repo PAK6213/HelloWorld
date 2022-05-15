@@ -29,7 +29,7 @@ public class Menu {
 
 	// main Menu 실행
 	public void main() {
-		//sp.mainTitle();
+		sp.mainTitle();
 		boolean b = true;
 		sp.clearScreen();
 		while(b) {
@@ -67,12 +67,12 @@ public class Menu {
 	// first MenuTitle
 	private void menuTitle() {
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-		System.out.println("■            메뉴를 선택하세요               ■");
-		System.out.println("■               1.회원가입                 ■");
+		System.out.println("■            메뉴를 선택하세요   	         ■");
+		System.out.println("■               1.회원가입    	         ■");
 		System.out.println("■               2.로그인     	     \t ■");
-		System.out.println("■               3.순위                    ■");
-		System.out.println("■               4.회원탈퇴                 ■");
-		System.out.println("■               5.종료                    ■");
+		System.out.println("■               3.순위       	         ■");
+		System.out.println("■               4.회원탈퇴    	         ■");
+		System.out.println("■               5.종료     	         ■");
 		System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 
 	}
@@ -213,12 +213,12 @@ public class Menu {
 			try {
 				System.out.println("");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-				System.out.println("■         다마고치 게임을 시작합니다.          ■");
-				System.out.println("■            1.다마고치 생성                ■");
-				System.out.println("■            2.다마고치 불러오기             ■");
-				System.out.println("■            3.다마고치 삭제                ■");
-				System.out.println("■            4.다마고치 목록                ■");
-				System.out.println("■            5.로그아웃                    ■");
+				System.out.println("■         다마고치 게임을 시작합니다.            ■");
+				System.out.println("■            1.다마고치 생성                 ■");
+				System.out.println("■            2.다마고치 불러오기     	         ■");
+				System.out.println("■            3.다마고치 삭제                 ■");
+				System.out.println("■            4.다마고치 목록                 ■");
+				System.out.println("■            5.로그아웃                 	 ■");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.print("이용하실 메뉴를 입력하세요 : ");
 
@@ -292,7 +292,7 @@ public class Menu {
 		sp.process();
 		damagochi.setDamagochiName(damagochiName);
 		damagochi = damagochisignup.readDamagochi(damagochi);
-
+// 여기까진 디버깅상 문제없음
 
 		boolean b = true;
 		while(b) {
@@ -315,9 +315,10 @@ public class Menu {
 				break;
 			}
 			// 불러온 다마고치로 게임시작!  (여기 시점부터 쓰레드로 다마고치의 hp , 목마름, 포만감을 일정시간이 지날때마다 조정한다.)
-			Pr.start();
+			//Pr.start();
 			
 			try {
+				
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("                          다마고치의 조건확인 \r\n"
 						+ "1. 30초마다 포만감 20 감소 , 목마름 15 증가 , HP 20감소가 이루어진다.\r\n"
@@ -368,7 +369,7 @@ public class Menu {
 					// 종료
 				} else if(menu == 8) {
 					System.out.println("다마고치 게임을 종료합니다.");
-					Pr.stop();
+					//Pr.stop();
 					break;
 				} else {
 					System.out.println("잘못 입력 하였습니다.");

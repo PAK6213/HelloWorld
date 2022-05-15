@@ -177,32 +177,37 @@ public class DamagochiImpl implements DamagochiService {
 
 				if(menu == 1) {
 					sp.walking();
-					System.out.println("산책을 진행합니다.  건강 경험치가 30 증가 하였습니다.");
 					sp.clearScreen();
+					System.out.println("산책을 진행합니다.  건강 경험치가 30 증가 하였습니다.");
+					
 					damagochi.setHealthExp(damagochi.getHealthExp() + 30);
 					break;
 				} else if(menu == 2) {
 					sp.baseball();
-					System.out.println("야구을 진행합니다. 건강 경험치가 60 증가 하였습니다.");
 					sp.clearScreen();
+					System.out.println("야구을 진행합니다. 건강 경험치가 60 증가 하였습니다.");
+					
 					damagochi.setHealthExp(damagochi.getHealthExp() + 60);
 					break;
 				} else if(menu == 3) {
 					sp.sc();
-					System.out.println("축구를 진행합니다. 건강 경험치가 45 증가 하였습니다.");
 					sp.clearScreen();
+					System.out.println("축구를 진행합니다. 건강 경험치가 45 증가 하였습니다.");
+					
 					damagochi.setHealthExp(damagochi.getHealthExp() + 45);
 					break;
 				} else if(menu == 4) {
 					sp.badminton();
-					System.out.println("배드민턴을 진행합니다. 건강 경험치가 40 증가 하였습니다.");
 					sp.clearScreen();
+					System.out.println("배드민턴을 진행합니다. 건강 경험치가 40 증가 하였습니다.");
+					
 					damagochi.setHealthExp(damagochi.getHealthExp() + 40);
 					break;
 				} else if(menu == 5) {
 					sp.swimming();
-					System.out.println("수영을 진행합니다. 건강 경험치가 50 증가 하였습니다.");
 					sp.clearScreen();
+					System.out.println("수영을 진행합니다. 건강 경험치가 50 증가 하였습니다.");
+					
 					damagochi.setHealthExp(damagochi.getHealthExp() + 40);
 					break;
 				} else {
@@ -296,7 +301,6 @@ public class DamagochiImpl implements DamagochiService {
 				if(menu == 1) {
 					minigame.UpDown();
 					damagochi.setIqExp(damagochi.getIqExp() + 15);
-					sp.clearScreen();
 					System.out.println("");
 					break;
 					//단어 순서 맞추기
