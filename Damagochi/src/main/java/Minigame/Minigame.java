@@ -19,12 +19,17 @@ public class Minigame {
 		int randomNumber = (int)(Math.random()*10000) + 1;
 		int answerNumber;
 		boolean b = true;
-		System.out.println("숫자 맞추기 게임을시작합니다(범위는 1 ~ 10000)");
+		System.out.println("숫자 맞추기 게임을시작합니다(범위는 1 ~ 10000)   0 : 게임종료");
 		while(b) {
 			System.out.print("정답 숫자를 입력하세요 : ");
 			answerNumber = sc.nextInt();
 			sc.nextLine();
 
+			if(answerNumber == 0) {
+				System.out.println("게임을 종료합니다.");
+				break;
+			}
+			
 			if(answerNumber > 10000 || answerNumber < 0) {
 				System.out.println("범위 밖의 숫자를 입력하였습니다.");
 				continue;
@@ -37,7 +42,7 @@ public class Minigame {
 				System.out.println("입력한 수는 정답보다 작습니다.");
 			} else if(randomNumber < answerNumber) {
 				System.out.println("입력한 수는 정답보다 큽니다.");
-			}
+			} 
 		}
 	}
 
@@ -70,6 +75,7 @@ public class Minigame {
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("               1.단어 학습하기");
 				System.out.println("               2.단어 맞추기");
+				System.out.println("               3.게임 종료");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.print("메뉴를 선택하세요 : ");
 				int menu = Integer.parseInt(sc.nextLine());
@@ -112,6 +118,7 @@ public class Minigame {
 							System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 							System.out.println("               1.정답입력 ");
 							System.out.println("               2.힌트");
+							System.out.println("               3.이전메뉴");
 							System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 							System.out.print("메뉴를 선택하세요 : ");
 
@@ -143,10 +150,16 @@ public class Minigame {
 							} else {
 								System.out.println("틀렸습니다. 다시입력하세요!");
 							}
+						} else if(menu2 == 3) {
+							break1  = 0;
+							break;
 						}
 
 
 					}
+				}else if(menu == 3) {
+					System.out.println("게임을 종료합니다.");
+					break;
 				}
 			}catch (Exception e) {
 				sp.clearScreen();
@@ -185,6 +198,7 @@ public class Minigame {
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.println("                1.학습하기");
 				System.out.println("                2.수도 맞추기");
+				System.out.println("                3.종료");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.print("메뉴를 선택하세요 : ");
 				menu = Integer.parseInt(sc.nextLine());
@@ -207,7 +221,6 @@ public class Minigame {
 					System.out.println("문제 : " + problem[random] + "의 수도는?");
 					while(true) {
 
-
 						System.out.print("정답 : ");
 						String input = sc.nextLine();
 						if(input.equals(answer)) {
@@ -219,6 +232,10 @@ public class Minigame {
 							System.out.println("오답입니다.");
 						}
 					}
+				} else if (menu == 3) {
+					System.out.println("게임이 종료되었습니다.");
+					break1 = 0;
+				    break;
 				}
 
 			}catch (Exception e) {

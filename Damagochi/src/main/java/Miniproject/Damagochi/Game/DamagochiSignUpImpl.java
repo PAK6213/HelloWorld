@@ -127,7 +127,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 			e.printStackTrace();
 		}	
-		
+
 		if(vo2.getUserId() == null) {
 			vo2.setUserId("****");
 		}
@@ -149,7 +149,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 					vo.setIqLevel(result.getInt("IQ_LEVEL"));
 					vo.setSocialExp(result.getInt("SOCIAL_EXP"));
 					vo.setSocialLevel(result.getInt("SOCIAL_LEVEL"));
-					vo.setHealthExp(result.getInt("HEALTH_LEVEL"));
+					vo.setHealthExp(result.getInt("HEALTH_EXP"));
 					vo.setHealthLevel(result.getInt("HEALTH_LEVEL"));
 					vo.setHp(result.getInt("HP"));
 					vo.setDepressionCount(result.getInt("DEPRESSION_COUNT"));
@@ -169,7 +169,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 
 	}
-	
+
 	public List<Damagochi> selectListDamagochi() {
 		// sql 쿼리문의 결과 데이터를 ArrayList에 담음.
 		List<Damagochi> damagochis = new ArrayList<Damagochi>();
@@ -194,7 +194,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 		}
 		return damagochis;
 	}
-	
+
 	public List<Damagochi> DamagochiNameList() {
 		List<Damagochi> damagochis = new ArrayList<Damagochi>();
 		Damagochi vo;
@@ -213,8 +213,8 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		return damagochis;
 	}
 	//다마고치 
@@ -235,7 +235,7 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 				vo.setIqLevel(result.getInt("IQ_LEVEL"));
 				vo.setSocialExp(result.getInt("SOCIAL_EXP"));
 				vo.setSocialLevel(result.getInt("SOCIAL_LEVEL"));
-				vo.setHealthExp(result.getInt("HEALTH_LEVEL"));
+				vo.setHealthExp(result.getInt("HEALTH_EXP"));
 				vo.setHealthLevel(result.getInt("HEALTH_LEVEL"));
 				vo.setHp(result.getInt("HP"));
 				vo.setDepressionCount(result.getInt("DEPRESSION_COUNT"));
@@ -247,8 +247,150 @@ public class DamagochiSignUpImpl implements DamagochiSignUp {
 
 			e.printStackTrace();
 		}
-		
+
 		return vo;
+	}
+
+	public void updateDamagochi2(String name) {
+		// 다마고치 업데이트
+		String sql = "UPDATE DAMAGOCHI SET SATIETY = SATIETY-20 , THIRST = THIRST+15 , HP = HP-20  WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	// 레벨업.
+	public void DamagochiIQLevelUp(String name) {
+		String sql = "UPDATE DAMAGOCHI SET IQ_LEVEL = IQ_LEVEL + 1 WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void DamagochiIQExp(String name , int number) {
+		String sql = "UPDATE DAMAGOCHI SET IQ_EXP = ? WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, number);
+			psmt.setString(2, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void DamagochiHealthLevelUp(String name) {
+		String sql = "UPDATE DAMAGOCHI SET HEALTH_LEVEL = HEALTH_LEVEL + 1 WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DamagochiHealthExp(String name , int number) {
+		String sql = "UPDATE DAMAGOCHI SET HEALTH_EXP = ? WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, number);
+			psmt.setString(2, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DamagochiSocialLevelUp(String name) {
+		String sql = "UPDATE DAMAGOCHI SET SOCIAL_LEVEL = SOCIAL_LEVEL + 1 WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DamagochiSocialExp(String name , int number) {
+		String sql = "UPDATE DAMAGOCHI SET SOCIAL_EXP = ? WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, number);
+			psmt.setString(2, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void DamagochiHpCon() {
+		String sql = "UPDATE DAMAGOCHI SET HP = 100 WHERE HP > 100";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DamagochiThirstCon() {
+		String sql = "UPDATE DAMAGOCHI SET THIRST = 0 WHERE THIRST < 0";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public void DamagochiSatiteyCon() {
+		String sql = "UPDATE DAMAGOCHI SET SATIETY = 100 WHERE SATIETY > 100";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void DamagochiDepression() {
+		String sql = "UPDATE DAMAGOCHI SET DEPRESSION_COUNT = 0 WHERE DEPRESSION_COUNT < 0";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void DamagochiScore(String name) {
+		String sql = "UPDATE DAMAGOCHI SET SCORE = SOCIAL_LEVEL + HEALTH_LEVEL + IQ_LEVEL WHERE DAMAGOCHI_NAME = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, name);
+			psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

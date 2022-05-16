@@ -23,7 +23,7 @@ public class Menu {
 	private Scanner sc = new Scanner(System.in);
 	private int menu;
 	StatePrint sp = new StatePrint();
-	Print Pr = new Print();
+	Print Pr;
 
 	
 
@@ -213,11 +213,11 @@ public class Menu {
 			try {
 				System.out.println("");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
-				System.out.println("■         다마고치 게임을 시작합니다.            ■");
-				System.out.println("■            1.다마고치 생성                 ■");
-				System.out.println("■            2.다마고치 불러오기     	         ■");
-				System.out.println("■            3.다마고치 삭제                 ■");
-				System.out.println("■            4.다마고치 목록                 ■");
+				System.out.println("■         다마고치 게임을 시작합니다.          ■");
+				System.out.println("■            1.다마고치 생성                ■");
+				System.out.println("■            2.다마고치 불러오기             ■");
+				System.out.println("■            3.다마고치 삭제                ■");
+				System.out.println("■            4.다마고치 목록                ■");
 				System.out.println("■            5.로그아웃                 	 ■");
 				System.out.println("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 				System.out.print("이용하실 메뉴를 입력하세요 : ");
@@ -283,7 +283,6 @@ public class Menu {
 	// 다마고치 불러오기
 	private void damagochiloadToplay() {
 		// 다마고치 불러오기 
-
 		int check = 0;
 		Damagochi damagochi = new Damagochi();
 		System.out.print("불러올 다마고치의 이름을 입력하세요 : ");
@@ -292,20 +291,33 @@ public class Menu {
 		sp.process();
 		damagochi.setDamagochiName(damagochiName);
 		damagochi = damagochisignup.readDamagochi(damagochi);
-// 여기까진 디버깅상 문제없음
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			
+		}
+		Pr = new Print();
+		Pr.setStop(false);
+		Pr.start();
 
 		boolean b = true;
 		while(b) {
-            // 음식을 먹었는데 여기 와일문을 탈출함..
 			// 메뉴가 한번 수행되고 나서 다마고치의 성공 실패 조건을 수행한 뒤 업데이트
 			// 다마고치가 조건으로 실패했을경우 해당 다마고치를 삭제하고 이전메뉴로이동.
+			
 			damagochisignup.updateDamagochi(damagochi);
 			check = damagochiservice.checking(damagochi);
+			damagochi = damagochisignup.readDamagochi(damagochi);
+			
+			
+			
 			if(check == 1) {
 				damagochisignup.deleteDamagochi(damagochi);
 				sp.clearScreen();
 				sp.death();
 				System.out.println(damagochi.getDamagochiName() + "가 조건 미달성으로 실패하였습니다.");
+				Pr.stop();
 				break;
 			}
 			// 다마고치가 생성되지 않은경우에는 진행되지 않음.
@@ -315,7 +327,7 @@ public class Menu {
 				break;
 			}
 			// 불러온 다마고치로 게임시작!  (여기 시점부터 쓰레드로 다마고치의 hp , 목마름, 포만감을 일정시간이 지날때마다 조정한다.)
-			//Pr.start();
+			
 			
 			try {
 				
@@ -344,10 +356,11 @@ public class Menu {
 				menu = Integer.parseInt(sc.nextLine());
 				sp.clearScreen();
 
-				//thread.stop();
+				damagochi = damagochisignup.readDamagochi(damagochi);
+				
 				// 음식먹기
 				if(menu == 1) { 
-					damagochi = damagochiservice.eat(damagochi);
+					damagochi = damagochiservice.eat(damagochi);					
 					//마시기
 				} else if(menu == 2) { 
 					damagochi = damagochiservice.drinking(damagochi);
@@ -369,7 +382,8 @@ public class Menu {
 					// 종료
 				} else if(menu == 8) {
 					System.out.println("다마고치 게임을 종료합니다.");
-					//Pr.stop();
+					//Pr.setStop(true);
+					Pr.stop();
 					break;
 				} else {
 					System.out.println("잘못 입력 하였습니다.");
@@ -377,7 +391,9 @@ public class Menu {
 			} catch(Exception e) {
 				sp.clearScreen();
 			}
+			
 		}
+		
 	}
 
 
